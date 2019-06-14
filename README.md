@@ -161,6 +161,8 @@ IPv4 Public IP Public DNS (IPv4) :   3.82.156.86
 ![image](https://user-images.githubusercontent.com/33985509/59513135-8e103980-8eba-11e9-9000-731d5a9090e5.png)
 
 
+## Setup Putty and Puttygen
+
 
 downloaded puttygen for windows 
 
@@ -210,6 +212,10 @@ save private key will convert the pem to ppk file
 
 
 click open on the putty then it will connect to the server
+
+
+
+## Seup Terraform
 
 
 after login in to ubuntu server
