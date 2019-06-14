@@ -197,7 +197,11 @@ Error:
 ![image](https://user-images.githubusercontent.com/33985509/59523003-688e2a80-8ed0-11e9-8ecb-3c4388aa6d93.png)
 
 
-type terraform init  then terraform plan
+type terraform init  
+
+
+then terraform plan
+
 
 ![image](https://user-images.githubusercontent.com/33985509/59523054-8eb3ca80-8ed0-11e9-96c9-ee7b847a4497.png)
 
@@ -209,42 +213,29 @@ type terraform init  then terraform plan
 beacuse i need to pass credentails or roles
 
 
-![image](https://user-images.githubusercontent.com/33985509/59523431-8a3be180-8ed1-11e9-9940-d5b61fb2bf71.png)
+
+![image](https://user-images.githubusercontent.com/33985509/59527195-32a27380-8edb-11e9-9bb8-28bbee2b16de.png)
 
 
 
-![image](https://user-images.githubusercontent.com/33985509/59523548-e69f0100-8ed1-11e9-9509-5109777a0b8c.png)
+![image](https://user-images.githubusercontent.com/33985509/59527236-477f0700-8edb-11e9-8408-547f4db4c00f.png)
 
 
 
-
-
-![image](https://user-images.githubusercontent.com/33985509/59523677-2c5bc980-8ed2-11e9-9fa3-a12bfe19fb94.png)
-
+![image](https://user-images.githubusercontent.com/33985509/59527352-a775ad80-8edb-11e9-9d21-0e83d10e2b52.png)
 
 
 
-
-![image](https://user-images.githubusercontent.com/33985509/59523688-35e53180-8ed2-11e9-8355-9597adcc4189.png)
-
+![image](https://user-images.githubusercontent.com/33985509/59527383-bb211400-8edb-11e9-9259-3f3385002508.png)
 
 
 
 
-![image](https://user-images.githubusercontent.com/33985509/59523740-5d3bfe80-8ed2-11e9-9789-98bfe9a19246.png)
+![image](https://user-images.githubusercontent.com/33985509/59527409-cb38f380-8edb-11e9-90fd-be198f1fd609.png)
 
 
 
-
-
-![image](https://user-images.githubusercontent.com/33985509/59523950-e94e2600-8ed2-11e9-9552-cfa8216b682e.png)
-
-
-
-
-![image](https://user-images.githubusercontent.com/33985509/59523997-08e54e80-8ed3-11e9-9f12-f3891e709218.png)
-
-
+![image](https://user-images.githubusercontent.com/33985509/59527556-34206b80-8edc-11e9-8193-4ca79533e35d.png)
 
 
 
