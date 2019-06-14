@@ -176,5 +176,40 @@ https://atom.io/
 
 
 
+created demo/simpleinstance directory
+
+main.tf
+
+
+resource "aws_instance" "firtsdemo"
+	ami 		= "ami-922914f7"
+	instance_type = "t2.micro"
+
+ tags {
+   Name = "demoinstance"
+   }
+}
+
+
+
+Error:
+
+![image](https://user-images.githubusercontent.com/33985509/59523003-688e2a80-8ed0-11e9-8ecb-3c4388aa6d93.png)
+
+
+type terraform init  then terraform plan
+
+![image](https://user-images.githubusercontent.com/33985509/59523054-8eb3ca80-8ed0-11e9-96c9-ee7b847a4497.png)
+
+
+![image](https://user-images.githubusercontent.com/33985509/59523203-fbc76000-8ed0-11e9-8c0f-2a2d47203af6.png)
+
+
+
+beacuse i need to pass credentails or roles
+
+![image](https://user-images.githubusercontent.com/33985509/59523431-8a3be180-8ed1-11e9-9940-d5b61fb2bf71.png)
+
+
 
 
