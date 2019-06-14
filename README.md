@@ -5,6 +5,9 @@
 ![image](https://user-images.githubusercontent.com/33985509/59514648-94ec7b80-8ebd-11e9-928b-40d18609a767.png)
 
 
+. Aws account 
+. Aws roles 
+. Terraform
 
 
 
@@ -471,6 +474,10 @@ root@ip-172-31-83-192:~/demo/simpleinstance# terraform -force-unlock
 
 
 
+
+
+
+
 create iam user and pass through provider.tf
 
 Create IAM user and pass through environment varaiables
@@ -480,4 +487,54 @@ Attach admin role to instance
 Storing it under ~/.aws/
 
 
+
+
+What are IAM roles?
+
+IAM roles are a secure way to grant permissions to entities that you trust. Examples of entities include the following:
+
+IAM user in another account
+
+Application code running on an EC2 instance that needs to perform actions on AWS resources
+
+An AWS service that needs to act on resources in your account to provide its features
+
+Users from a corporate directory who use identity federation with SAML
+
+IAM roles issue keys that are valid for short durations, making them a more secure way to grant access.
+
+
+
+
+
+
+![image](https://user-images.githubusercontent.com/33985509/59532108-122ce600-8ee8-11e9-9f6e-9b7514993f8f.png)
+
+
+
+![image](https://user-images.githubusercontent.com/33985509/59532171-430d1b00-8ee8-11e9-810b-a03cc5275328.png)
+
+
+
+![image](https://user-images.githubusercontent.com/33985509/59532755-edd20900-8ee9-11e9-9651-5f81939ef2ae.png)
+
+
+Using  below keys we can manage terraform 
+
+Access Key ID: 
+
+Secret access key:
+
+Else we click on  download.csv icon  to get these keys
+
+
+vi provider.tf
+
+provider "aws"
+{
+
+	access_key = "XXXXXXXXXXXXXXXXX"  # AWS Access Key
+	secret_key = "XXXXXXXXXXXXXXXXX"  # AWS secret Key
+	region = "us-east-2"  # region which i wanted to operate 
+}
 
