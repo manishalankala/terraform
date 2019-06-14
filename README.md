@@ -217,7 +217,11 @@ beacuse i need to pass credentails or roles
 
 
 
+
+
 ![image](https://user-images.githubusercontent.com/33985509/59523677-2c5bc980-8ed2-11e9-9fa3-a12bfe19fb94.png)
+
+
 
 
 
@@ -225,11 +229,16 @@ beacuse i need to pass credentails or roles
 
 
 
+
+
 ![image](https://user-images.githubusercontent.com/33985509/59523740-5d3bfe80-8ed2-11e9-9789-98bfe9a19246.png)
 
 
 
+
+
 ![image](https://user-images.githubusercontent.com/33985509/59523950-e94e2600-8ed2-11e9-9552-cfa8216b682e.png)
+
 
 
 
@@ -243,72 +252,87 @@ Now if i try it will now through error
 
 
 root@ip-172-31-83-192:~/demo/simpleinstance# terraform plan
+
 provider.aws.region
-  The region where AWS operations will take place. Examples
-  are us-east-1, us-west-2, etc.
+
+  The region where AWS operations will take place. 
+  
+  
+  Examples :  are us-east-1, us-west-2, etc.
+
 
   Default: us-east-1
+ 
+ 
   Enter a value: us-east-2
-
-Refreshing Terraform state in-memory prior to plan...
-
-The refreshed state will be used to calculate this plan, but will not be
-
-persisted to local or remote state storage.
+  
 
 
-------------------------------------------------------------------------
-
-An execution plan has been generated and is shown below.
-Resource actions are indicated with the following symbols:
-  + create
-
-Terraform will perform the following actions:
-
-  + aws_instance.firtsdemo
-      id:                           <computed>
-      ami:                          "ami-922914f7"
-      arn:                          <computed>
-      associate_public_ip_address:  <computed>
-      availability_zone:            <computed>
-      cpu_core_count:               <computed>
-      cpu_threads_per_core:         <computed>
-      ebs_block_device.#:           <computed>
-      ephemeral_block_device.#:     <computed>
-      get_password_data:            "false"
-      host_id:                      <computed>
-      instance_state:               <computed>
-      instance_type:                "t2.micro"
-      ipv6_address_count:           <computed>
-      ipv6_addresses.#:             <computed>
-      key_name:                     <computed>
-      network_interface.#:          <computed>
-      network_interface_id:         <computed>
-      password_data:                <computed>
-      placement_group:              <computed>
-      primary_network_interface_id: <computed>
-      private_dns:                  <computed>
-      private_ip:                   <computed>
-      public_dns:                   <computed>
-      public_ip:                    <computed>
-      root_block_device.#:          <computed>
-      security_groups.#:            <computed>
-      source_dest_check:            "true"
-      subnet_id:                    <computed>
-      tags.%:                       "1"
-      tags.Name:                    "demoinstance"
-      tenancy:                      <computed>
-      volume_tags.%:                <computed>
-      vpc_security_group_ids.#:     <computed>
+![image](https://user-images.githubusercontent.com/33985509/59524326-d851e480-8ed3-11e9-869b-45fbe014a99b.png)
 
 
-Plan: 1 to add, 0 to change, 0 to destroy.
 
-------------------------------------------------------------------------
+![image](https://user-images.githubusercontent.com/33985509/59524542-704fce00-8ed4-11e9-831f-82f545633b13.png)
 
-Note: You didn't specify an "-out" parameter to save this plan, so Terraform
-can't guarantee that exactly these actions will be performed if
-"terraform apply" is subsequently run.
+
+
+
+then type terraform apply
+
+
+![image](https://user-images.githubusercontent.com/33985509/59524873-3b904680-8ed5-11e9-8707-0e6b482742cb.png)
+
+
+
+![image](https://user-images.githubusercontent.com/33985509/59525059-a3469180-8ed5-11e9-8cee-ccb79e3c0225.png)
+
+
+
+now 
+
+
+
+![image](https://user-images.githubusercontent.com/33985509/59525123-d12bd600-8ed5-11e9-872b-378f481b635a.png)
+
+
+
+now i check on ohio location my instance is running
+
+
+
+![image](https://user-images.githubusercontent.com/33985509/59525202-09cbaf80-8ed6-11e9-8bb6-726a88537656.png)
+
+
+
+enter command terraform destroy
+
+
+
+
+![image](https://user-images.githubusercontent.com/33985509/59526212-aee78780-8ed8-11e9-8e7e-22a007a043c3.png)
+
+
+
+Error : 
+
+![image](https://user-images.githubusercontent.com/33985509/59526972-95dfd600-8eda-11e9-8268-5be76ea43634.png)
+
+
+
+
+![image](https://user-images.githubusercontent.com/33985509/59527032-ca539200-8eda-11e9-802d-4bad494ff5c3.png)
+
+
+
+
+root@ip-172-31-83-192:~/demo/simpleinstance# terraform -force-unlock
+
+
+
+
+![image](https://user-images.githubusercontent.com/33985509/59527098-f8d16d00-8eda-11e9-9828-233adbdf5fcd.png)
+
+
 
 
 
