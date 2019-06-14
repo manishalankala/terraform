@@ -9,7 +9,7 @@
 
 
 
-<b>Creating AWS account<\b>
+## Creating AWS account
 
 https://aws.amazon.com/console/
 
