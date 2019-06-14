@@ -38,6 +38,7 @@ Link : https://www.puttygen.com/
 
 Puttygen aka Putty Key Generator
 
+
 The key generation utility – PuTTYgen can create various public-key cryptosystems including Rivest–Shamir–Adleman (RSA), Digital Signature Algorithm (DSA), Elliptic Curve Digital Signature Algorithm (ECDSA), and Edwards-curve Digital Signature Algorithm (EdDSA) keys.
 
 The aforementioned public-key cryptosystems principally focus on secure data transmission and digital signatures.
