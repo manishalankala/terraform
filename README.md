@@ -9,11 +9,142 @@
 
 
 
+# Creating AWS account
+
+https://aws.amazon.com/console/
+
+
+Create your account
+
+Go to the Amazon Web Services home page.
+
+Choose Sign Up.
+
+Note: If you've signed in to AWS recently, the button might say Sign In to the Console.
+
+
+Enter your account information, and then choose Continue.
+
+Important: Be sure that you enter your account information correctly, especially your email address. 
+
+If you enter your email address incorrectly, you won't be able to access your account. 
+
+If Create a new AWS account isn't visible, first choose Sign in to a different account, and then choose Create a new AWS account.
+
+Choose Personal or Professional.
+
+Note: Personal accounts and professional accounts have the same features and functions.
+
+Enter your company or personal information.
+
+Read and accept the AWS Customer Agreement.
+
+Note: Be sure that you read and understand the terms of the AWS Customer Agreement.
+
+Choose Create Account and Continue.
+
+You receive an email to confirm that your account is created. 
+
+You can sign in to your new account using the email address and password you supplied. 
+
+However, you can't use AWS services until you finish activating your account.
+
+Add a payment method
+
+On the Payment Information page, enter the information about your payment method, and then choose Secure Submit.
+
+Note: If you want to use a different address for your AWS account, choose Use a new address before you choose Secure Submit.
+
+Verify your phone number
+
+Choose whether you want to verify your account by Text message (SMS) or a Voice call.
+
+Choose your country or region code from the list.
+
+Enter a phone number where you can be reached in the next few minutes.
+
+Enter the code displayed in the captcha.
+
+When you're ready, choose Contact me. In a few moments, an automated system will contact you.
+
+Note: If you chose to verify your account by SMS, choose Send SMS instead.
+
+Enter the PIN you receive by text message or voice call, and then choose Continue.
+
+Choose an AWS Support plan
+
+On the Select a Support Plan page, choose one of the available Support plans. 
+
+For a description of the available Support plans and their benefits, see Compare AWS Support Plans.
+
+Wait for account activation
+
+After you choose a Support plan, a confirmation page indicates that your account is being activated.
+
+Accounts are usually activated within a few minutes, but the process might take up to 24 hours.
+
+You can sign in to your AWS account during this time. The AWS home page might display a button that shows "Complete Sign Up" during this time, 
+
+even if you've completed all the steps in the sign-up process.
+
+When your account is fully activated, you'll receive a confirmation email.
+
+After you receive this email, you have full access to all AWS services.
+
+Troubleshooting delays in account activation
+
+Account activation can sometimes be delayed. 
+
+If the process takes more than 24 hours, check the following:
+
+Finish the account activation process. You might have accidentally closed the window for the sign-up process before you've added all the necessary information. 
+
+To finish the sign-up process, 
+
+open https://aws-portal.amazon.com/gp/aws/developer/registration/index.html 
+
+
+sign in using the email address and password you chose for the account.
+
+
+Check the information associated with your payment method.
+
+Check Payment Methods in the AWS Billing and Cost Management console. 
+
+Fix any errors in the information.
+
+Contact your financial institution. 
+
+Financial institutions occasionally reject authorization requests from AWS for various reasons. 
+
+Contact your payment method's issuing institution and ask that they approve authorization requests from AWS.
+
+
+Note: AWS cancels the authorization request as soon as it's approved by your financial institution. 
+
+You aren't charged for authorization requests from AWS. 
+
+Authorization requests might still appear as a small charge (usually 1 USD) on statements from your financial institution.
+
+Check your email for requests for additional information. Check your email to see if AWS needs any information from you to complete the activation process.
+
+
+Try a different browser.
+
+Contact AWS Support. Contact AWS Support for help. 
+
+Be sure to mention any troubleshooting steps that you already tried.
+
+Note: Don't provide sensitive information, such as credit card numbers, in any correspondence with AWS.
 
 
 
 
-Trying on amazon ubuntu instance 
+
+
+
+
+I am tried creating on amazon ubuntu instance 
 
 
 ![image](https://user-images.githubusercontent.com/33985509/59512918-0cb8a700-8eba-11e9-8d6f-1f59475f34eb.png)
@@ -43,7 +174,9 @@ The key generation utility – PuTTYgen can create various public-key cryptosyst
 
 The aforementioned public-key cryptosystems principally focus on secure data transmission and digital signatures.
 
+
 Although PuTTYgen collects keys in its native file format i.e. .ppk files, the keys can easily be converted to any file format. 
+
 
 For Windows, the software interface is PuTTYgen.exe, whereas, for Linux OS the command-line adaptation is available using SSH commands.
 
@@ -61,6 +194,7 @@ Load the pem and genereate the .ppk file by clicking on generate private key and
 ![image](https://user-images.githubusercontent.com/33985509/59513233-b5670680-8eba-11e9-86cd-e74d80ef48ec.png)
 
 
+
 ![image](https://user-images.githubusercontent.com/33985509/59513291-daf41000-8eba-11e9-9044-570aaf8d9989.png)
 
 
@@ -69,6 +203,7 @@ save private key will convert the pem to ppk file
 
 
 ![image](https://user-images.githubusercontent.com/33985509/59513465-2dcdc780-8ebb-11e9-8b08-40dedd4ac079.png)
+
 
 
 ![image](https://user-images.githubusercontent.com/33985509/59517434-e435aa80-8ec3-11e9-9464-693f00ce2f1a.png)
@@ -94,7 +229,10 @@ Right click and copy link
 wget https://releases.hashicorp.com/terraform/0.12.2/terraform_0.12.2_linux_amd64.zip
 
 
+
 ![image](https://user-images.githubusercontent.com/33985509/59514308-dd576980-8ebc-11e9-9af1-90a4ff611469.png)
+
+
 
 
 ![image](https://user-images.githubusercontent.com/33985509/59514392-0b3cae00-8ebd-11e9-8f74-4cba2fd06bce.png)
@@ -327,6 +465,13 @@ root@ip-172-31-83-192:~/demo/simpleinstance# terraform -force-unlock
 
 
 
+create iam user and pass through provider.tf
+
+Create IAM user and pass through environment varaiables
+
+Attach admin role to instance
+
+Storing it under ~/.aws/
 
 
 
