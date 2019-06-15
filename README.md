@@ -6,7 +6,9 @@
 
 
 . Aws account 
+
 . Aws roles 
+
 . Terraform
 
 
@@ -143,6 +145,36 @@ Note: Don't provide sensitive information, such as credit card numbers, in any c
 
 
 
+Available Regions: 
+
+  Code	                 Name
+us-east-1	   US East (N. Virginia)
+us-east-2	   US East (Ohio)
+us-west-1	   US West (N. California)
+us-west-2	   US West (Oregon)
+ca-central-1	   Canada (Central)
+eu-central-1	   EU (Frankfurt)
+eu-west-1	   EU (Ireland)
+eu-west-2	   EU (London)
+eu-west-3	   EU (Paris)
+eu-north-1	   EU (Stockholm)
+ap-east-1	   Asia Pacific (Hong Kong)
+ap-northeast-1	   Asia Pacific (Tokyo)
+ap-northeast-2	   Asia Pacific (Seoul)
+ap-northeast-3	   Asia Pacific (Osaka-Local)
+ap-southeast-1	   Asia Pacific (Singapore)
+ap-southeast-2	   Asia Pacific (Sydney)
+ap-south-1	   Asia Pacific (Mumbai)
+sa-east-1	   South America (São Paulo)
+
+
+
+
+
+
+
+
+
 
 
 
@@ -219,6 +251,30 @@ click open on the putty then it will connect to the server
 
 
 ## Seup Terraform
+
+
+command: terraform init
+
+Run when you start a new working environment
+
+Safe to run mutiple times 
+
+else Error : error satisfying plugin requirement
+
+
+
+command: terraform plan
+
+to run before apply
+
+gives complete create/modify plan to visualize
+
+
+
+command: terraform apply
+
+Creates all resources
+
 
 
 after login in to ubuntu server
@@ -529,6 +585,9 @@ here i tried to removed the roles of my ubuntu instance by
 hence  cannot run any terraform commands on my ubuntu  instance 
 
 
+(IAM user & passing credentails through provider.tf)
+
+
 Using  below keys we can manage terraform 
 
 Access Key ID: 
@@ -558,5 +617,229 @@ then terraform apply
 Hence my instance is created 
 
 
+(IAM user & passing cedentails through env)
 
 
+export AWS_ACCESS_KEY="XXXXXXXXXXXXXXXXXXXXXXXXXX"
+export AWS_SECRET_KEY="XXXXXXXXXXXXXXXXXXXXXXXXXX" 
+
+
+i specified the linux,ami-a0cfeed8 in main.tf and name changed ,location to us-west-2
+
+
+![image](https://user-images.githubusercontent.com/33985509/59549973-878acc00-8f65-11e9-8208-afec39749a35.png)
+
+
+
+
+creating s3bucket
+
+
+
+touch s3bucket.tf
+
+
+vi s3bucket.tf
+
+
+
+resource "aws_s3_bucket" "terraform-s3" {
+
+	bucket = "terraform-s3-testing"
+
+	versioning {
+
+		enabled = true
+
+	}
+
+	lifecycle {
+
+		prevent_destroy = true
+
+	}
+
+	tags {
+
+		Name = "S3 Remote store"
+
+	}
+
+}
+
+
+
+![image](https://user-images.githubusercontent.com/33985509/59550299-44325c80-8f69-11e9-8fc9-253a33d929a5.png)
+
+
+need to choose a distinct name,s3 does not depends on the region availability zones
+
+removed the main.tf 
+
+type terraform plan
+
+type terraform apply
+
+
+root@ip-172-31-83-192:~/demo/simpleinstance# cat s3bucket.tf
+
+resource "aws_s3_bucket" "terraform-s3" {
+
+        bucket = "terraform-s3-coretesting"
+
+        versioning {
+
+                enabled = true
+
+        }
+
+        lifecycle {
+
+                prevent_destroy = true
+
+        }
+
+        tags {
+
+                Name = "S3 chintu test"
+
+        }
+
+}
+
+
+
+
+![image](https://user-images.githubusercontent.com/33985509/59550445-32ea4f80-8f6b-11e9-9a23-9b0a19e3ab0d.png)
+
+
+
+Launching multiple instances 
+
+i choose Amazon Linux AMI 2018.03.0 (HVM), SSD Volume Type - ami-07a0c6e669965bb7c, Region : us-west-2
+
+
+
+
+
+
+![image](https://user-images.githubusercontent.com/33985509/59551270-6b902600-8f77-11e9-95ab-64c0a190412c.png)
+
+
+
+
+resource "aws_instance" "manish" {
+	count = 2
+	ami 		= "ami-922914f7"
+	instance_type = "t2.micro"
+
+ tags {
+   Name = "amazonlinux-${count.index}"
+   }
+}
+
+
+![image](https://user-images.githubusercontent.com/33985509/59551300-d8a3bb80-8f77-11e9-93e5-cae6720be32e.png)
+
+
+error because as i deleted provider.tf 
+
+hence type 
+
+export AWS_ACCESS_KEY="XXXXXXXXXXXXXXX"
+export AWS_SECRET_KEY="XXXXXXXXXXXXXXXXXXXXXXXXXXX" 
+
+type terraform plan
+
+type terraform apply
+
+
+Error because ami i did mention belongs to us-east-2
+
+
+![image](https://user-images.githubusercontent.com/33985509/59551336-3df7ac80-8f78-11e9-8aa0-601a12b99596.png)
+
+
+now changed
+
+resource "aws_instance" "manish" {
+	count = 2
+	ami 		= "ami-07a0c6e669965bb7c"
+	instance_type = "t2.micro"
+
+ tags {
+   Name = "amazonlinux-${count.index}"
+   }
+}
+
+type terraform plan
+
+type terraform apply
+
+
+![image](https://user-images.githubusercontent.com/33985509/59551404-37b60000-8f79-11e9-91de-42560a899fad.png)
+
+
+Hence created instances on us-west-2
+
+![image](https://user-images.githubusercontent.com/33985509/59551415-67fd9e80-8f79-11e9-9375-2407fad3c383.png)
+
+
+
+after that i type terraform destroy
+
+hence confirm by 
+
+![image](https://user-images.githubusercontent.com/33985509/59551547-99776980-8f7b-11e9-82b8-410fccd23b01.png)
+
+
+
+
+
+Variables:
+
+Now i try Red Hat Enterprise Linux 8 (HVM), SSD Volume Type - ami-079596bf7a949ddf8
+
+
+touch variables.tf
+
+vi touch.tf
+
+
+variable "amitype" {
+}
+
+
+changed in main.tf
+
+resource "aws_instance" "manish" {
+ami = "${var.amitype}"
+instance_type = "t2.micro"
+
+ tags {
+   Name = "amazonrhel"
+   }
+}
+
+
+terraform plan
+
+Enter the ami : ami-079596bf7a949ddf8
+
+
+![image](https://user-images.githubusercontent.com/33985509/59551825-9ed6b300-8f7f-11e9-9e3c-2cf0ab6ca8e2.png)
+
+
+
+adding now some changes to variables.tf
+
+
+variable "amitype" {
+default = "ami-079596bf7a949ddf8"
+}
+
+
+
+else we can also define this via inline
+
+terraform plan  -var amitype='ami-079596bf7a949ddf8"'
