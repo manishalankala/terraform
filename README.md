@@ -519,6 +519,16 @@ IAM roles issue keys that are valid for short durations, making them a more secu
 ![image](https://user-images.githubusercontent.com/33985509/59532755-edd20900-8ee9-11e9-9651-5f81939ef2ae.png)
 
 
+
+here i tried to removed the roles of my ubuntu instance by 
+
+
+![image](https://user-images.githubusercontent.com/33985509/59545481-03adf100-8f1f-11e9-9337-5eb5c5233c6b.png)
+
+
+hence  cannot run any terraform commands on my ubuntu  instance 
+
+
 Using  below keys we can manage terraform 
 
 Access Key ID: 
@@ -537,4 +547,16 @@ provider "aws"
 	secret_key = "XXXXXXXXXXXXXXXXX"  # AWS secret Key
 	region = "us-east-2"  # region which i wanted to operate 
 }
+
+
+
+Now type terraform run
+
+then terraform apply
+
+
+Hence my instance is created 
+
+
+
 
