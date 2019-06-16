@@ -843,3 +843,249 @@ default = "ami-079596bf7a949ddf8"
 else we can also define this via inline
 
 terraform plan  -var amitype='ami-079596bf7a949ddf8"'
+
+
+
+
+
+
+want to pass multiple values as  like for security groups or availability zones.
+
+Or may need multiple availability zones to be pass for resource or you may need to pass multiple security groups for resource.
+
+In those cases you need list variables.
+
+i am taking 
+
+SUSE Linux Enterprise Server 15 (HVM), SSD Volume Type - ami-0be4d33b23ba37935
+Red Hat Enterprise Linux 8 (HVM), SSD Volume Type - ami-08949fb6466dd2cf3
+
+
+
+
+
+
+In main.tf 
+
+resource "aws_instance" "firstdemo" {
+ami = "${lookup(var.ami_type,var.region)}"
+security_groups = "${var.sgs}"
+instance_type = "${lookup(var.instance_type,var.env)}"
+
+	tags {
+	Name = "uswestinstances"
+	}
+}
+
+
+
+
+In provider.tf
+
+provider "aws"
+{
+
+        access_key = "AKIA2JM4R23G5FJ42TQL"  # AWS Access Key
+        secret_key = "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"  # AWS secret Key
+        region = "us-west-1"  # region which i wanted to operate
+}
+
+
+
+
+
+
+In variables.tf
+
+variable "ami_type" {
+	default = {
+	type = "map"
+	us-west-1 = "ami-0be4d33b23ba37935"
+	us-west-1 = "ami-08949fb6466dd2cf3"
+
+}
+
+}
+
+variable "env" {}
+variable "region" {}
+variable "instance_type" {
+
+type = "map"
+default = { 
+
+	dev = "t2.micro"
+	test = "t2.micro"
+	
+	}
+
+}
+
+variable "sgs" {
+	type = "list"
+
+	default = ["sg-07b2fc6c", "sg-48bba323"]
+	
+}
+
+
+
+terraform plan
+
+terraform apply
+
+getting error 
+
+
+Error: Error applying plan:
+
+
+
+1 error(s) occurred:
+
+
+
+* aws_instance.manish: 1 error(s) occurred:
+
+
+
+* aws_instance.manish: Error launching instance, possible mismatch of Security Group IDs and Names. See AWS Instance docs here: https://terraform.io/docs/providers/aws/r/instance.html.
+
+
+
+        AWS Error: Value () for parameter groupId is invalid. The value cannot be empty
+
+
+
+Terraform does not automatically rollback in the face of errors.
+
+Instead, your Terraform state file has been partially updated with
+
+any resources that successfully completed. Please address the error
+
+above and apply again to incrementally change your infrastructure.
+
+
+
+created new security group 
+
+sg-0038d15c6700fefe3
+sg-96a42bcd
+
+
+Error : persists
+
+
+
+
+DataSources
+
+In main.tf
+
+data "aws_availability_zones" "available" {}
+
+resource "aws_instance" "manish" {
+
+ami = "${lookup(var.ami_type,var.region)}"
+
+availability_zone = "${data.aws_availability_zones.available.names[3]}"
+
+security_groups = "${var.sgs}"
+
+instance_type="${lookup(var.instance_type,var.env)}"
+
+ tags {
+
+   Name = "coreinstance"
+
+ }
+
+}
+
+
+----------------------
+
+data "aws_availability_zones" "available" {}
+
+resource "aws_rds_cluster" "default" {
+
+cluster_identifier      = "${var.CLUSTER_IDENTIFIER}"
+
+engine                  = "aurora-mysql"
+
+engine_version          = "5.7.12"
+
+availability_zones      = ["${data.aws_availability_zones.available.names}"]
+
+database_name           = "${var.DATABASE_NAME}"
+
+master_username         = "${var.MASTER_USERNAME}"
+
+master_password         = "${var.MASTER_PASSWORD}"
+
+backup_retention_period = 7
+
+preferred_backup_window = "07:00-09:00"
+
+skip_final_snapshot     = "true"
+
+apply_immediately       = "true"
+
+vpc_security_group_ids  = ["${var.VPC_SECURITY_GROUP_IDS}"]
+
+db_subnet_group_name    = "${var.DB_SUBNET_GROUP_NAME}"
+
+tags {
+
+  Name         = "${var.ENVIRONMENT_NAME}-Aurora-DB-Cluster"
+
+  ManagedBy    = "${var.MANAGER}"
+
+  Environment  = "${var.ENVIRONMENT_NAME}"
+
+}
+
+}
+
+
+
+if i do a terraform plan
+
+env: dev
+
+region : us-west-1
+
+works
+
+
+
+Terraform graph
+
+apt install graphviz
+
+terraform graph | dot -Tpng > graph.png
+
+
+
+to get terraform output 
+
+main.tf we can define
+
+
+output "outputpage" {
+
+	value = "${aws_instance.firstdemo.public_ip}"
+}
+
+if we run terraform apply
+
+it will show the output elsetype  terraform output outputpage to display results
+
+
+
+
+
+
+
+
+
