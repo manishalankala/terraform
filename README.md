@@ -1077,10 +1077,148 @@ output "outputpage" {
 	value = "${aws_instance.firstdemo.public_ip}"
 }
 
-if we run terraform apply
+if i run terraform apply
 
 it will show the output elsetype  terraform output outputpage to display results
 
+
+
+
+
+
+
+
+interpolation means  ${...}
+
+
+
+
+
+
+
+vpc.tf
+
+
+
+
+data "aws_availability_zones" "available" {}
+
+#main vpc
+resource "aws_vpc" "main"
+	cidr_block	= "${var.VPC_CIDR_BLOCK}"
+	enable_dns_support = "true"
+	enable_dns_hostnames = "true"
+	tags {
+		Name = "${var.PROJECT_NAME}-vpc
+	}
+}
+
+
+# Route table for private subnets
+
+resource "aws_route_table" "private" {
+	vpc_id = "${aws_vpv.main.id}"
+	route {
+		cidr_block = "0.0.0.0/0"
+		gateway_id = "${aws_nat_gateway.ngw.id}"
+	}
+	
+	tags {
+		Name = "${var.PROJECT_NAME}-private-route-table"
+		}
+	}
+
+
+
+
+#public subnets
+
+#public Subnet 1
+resource "aws_subnet" "public_subnet_1"	{
+	vpc_id	= "${aws_vpc.main.id}
+	cidr_block = "${var.VPC_PUBLIC_SUBNET1_CIDR_BLOCK}"
+	availability_zone = "${data.aws_availability_zones.available.names[0]}"
+	map_public_ip_on_launch = "true"
+	tags {
+		Name = "${var.PROJECT_NAME}-vpc-public-subnet-1"
+	}
+}
+
+
+#public Subnet 2
+resource "aws_subnet" "public_subnet_2" {
+	vpc_id = "${aws_vpc.main.id}"
+	cidr_block = "${var.VPC_PUBLIC_SUBNET2_CIDR_BLOCK}"
+	availability_zone = "${data.aws_availability_zonesavailable.names[1]}"
+	map_public_ip_on_lauch = "true"
+	tags {
+		Name = "${var.PROJECT_NAME}-vpc-public-subnet-2"
+	}
+}
+
+
+
+#private Subnet 1
+resource "aws_subnet" "public_subnet_1" {
+	vpc_id = "${aws_vpc.main.id}"
+	cidr_block = "${var.VPC_PUBLIC_SUBNET1_CIDR_BLOCK}"
+	availability_zone = "${data.aws_availability_zonesavailable.names[0]}"
+	map_public_ip_on_lauch = "true"
+	tags {
+		Name = "${var.PROJECT_NAME}-vpc-public-subnet-1"
+	}
+}
+
+#private Subnet 2
+resource "aws_subnet" "public_subnet_2" {
+	vpc_id = "${aws_vpc.main.id}"
+	cidr_block = "${var.VPC_PUBLIC_SUBNET1_CIDR_BLOCK}"
+	availability_zone = "${data.aws_availability_zonesavailable.names[1]}"
+	map_public_ip_on_lauch = "true"
+	tags {
+		Name = "${var.PROJECT_NAME}-vpc-public-subnet-2"
+	}
+}
+
+#internet gateway
+resource "aws_internet_gateway" "igw" {
+	vpc_id = "${aws_vpc.main.id}"
+	
+	tags {
+		Name = "${var.PROJECT_NAME}-vpc-internet-gateway"
+	}
+}
+
+#Elastic IP for NAT Gateway
+resource "aws_eip" "nat_eip" {
+	vpc = true
+	depends_on = {"aws_internet_gateway.igw"}
+}
+
+#NAT gateway for private ip address
+resource "aws_nat_gateway" "ngw"
+	allocation_id = "${aws_eip.nat_eip.id}"
+	subnet_id = "${aws_subnet.public_subnet_1.id}
+	depends_on = ["aws_internet_gateway.igw"]
+	tags {
+		Name = "${var.PROJEVT_NAME}-vpc-NAT-gateway"
+	}
+}
+
+#Route table for public architecture
+
+resource "aws_route_table" "public"
+	vpc_id = "${aws_vpc.amin.id}"
+	route {
+		cidr_block = "0.0.0.0/0"
+		gateway_id = "${aws_internet_gateway.igw.id}"
+	}
+	
+	tags {
+		Name = "${var.PROJECT_NAME}-public-route-table"
+		
+		}
+}
 
 
 
