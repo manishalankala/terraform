@@ -12,6 +12,12 @@
 . Terraform
 
 
+## Prerequisites
+
+. Putty or Kitty
+
+. AWS or Google Cloud account
+
 
 
 ## Creating AWS account
