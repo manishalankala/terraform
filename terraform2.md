@@ -4,6 +4,18 @@ sample
 
 
 
+mostly used 
+
+terraform init
+
+terraform plan
+
+terraform apply
+
+terraform destroy
+
+
+
 | Commands  | Description |
 | ------------- | ------------- |
 | terraform apply | Builds or changes infrastructure |
