@@ -372,8 +372,6 @@ All other commands:
 
 
 
-https://atom.io/
-
 
 ![image](https://user-images.githubusercontent.com/33985509/59518675-6f17a480-8ec6-11e9-950a-41873956a1ec.png)
 
