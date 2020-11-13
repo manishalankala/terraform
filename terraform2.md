@@ -62,3 +62,11 @@ resource "aws_dev_instance" "web" {
 }
 
 ```
+
+![image](https://user-images.githubusercontent.com/33985509/99122828-594c6880-25ff-11eb-9984-1596b6a64bcb.png)
+
+as we gave count =2 
+
+![image](https://user-images.githubusercontent.com/33985509/99122933-80a33580-25ff-11eb-84d8-0101d842593e.png)
+
+
