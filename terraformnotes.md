@@ -18,3 +18,16 @@ This will download the correct provider plug-ins for the project.
 ## Plan & Apply 
 
 Run terraform plan to verify creation process and then terraform apply to create real resources as well as state file that compares future changes in your configuration files to what actually exists in your deployment environment.
+
+
+
+
+Meta arguments
+| -------- |
+| depends_on |
+| count |
+| for_each |
+| provider |
+| lifecycle |
+| provisioner |
+| connection |
