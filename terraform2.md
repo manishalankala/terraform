@@ -77,4 +77,15 @@ output "instance" {
 
 ```
 
+
+or for all instances 
+
+```
+
+output "instance" {
+	value = aws_instance.web[*].public_ip
+}
+
+```
+
 terraform apply -auto-approve
