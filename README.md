@@ -373,9 +373,6 @@ All other commands:
 
 
 
-![image](https://user-images.githubusercontent.com/33985509/59518675-6f17a480-8ec6-11e9-950a-41873956a1ec.png)
-
-
 ![image](https://user-images.githubusercontent.com/33985509/59518830-d3d2ff00-8ec6-11e9-8d7b-6ff057aa7ad9.png)
 
 
