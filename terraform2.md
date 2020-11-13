@@ -89,3 +89,13 @@ output "instance" {
 ```
 
 terraform apply -auto-approve
+
+
+
+![image](https://user-images.githubusercontent.com/33985509/99123785-2e631400-2601-11eb-8044-7caddaa64274.png)
+
+lifecycle {
+	create_before_destroy = true
+	prevent_destroy = true
+	ignore_changes = [tags]
+}
