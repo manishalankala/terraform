@@ -69,4 +69,12 @@ as we gave count =2
 
 ![image](https://user-images.githubusercontent.com/33985509/99122933-80a33580-25ff-11eb-84d8-0101d842593e.png)
 
+```
 
+output "instance" {
+	value = aws_instance.web[0].public_ip
+}
+
+```
+
+terraform apply -auto-approve
