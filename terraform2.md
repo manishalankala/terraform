@@ -102,3 +102,9 @@ lifecycle {
 
 
 ![image](https://user-images.githubusercontent.com/33985509/99131363-3a57d180-2613-11eb-9b52-b55867aa9b99.png)
+
+
+![image](https://user-images.githubusercontent.com/33985509/99132122-712ee700-2615-11eb-9d37-6de81b140234.png)
+
+terraform apply -var-file dev.tfvars
+terraform apply -var-file prod.tfvars
