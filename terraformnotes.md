@@ -24,11 +24,30 @@ depends_on = [
 Types and Values : string,number,bool,list,map
 
 
+count or for_each
+
+alias
+
+lifecycle
+
+```
+lifecycle {
+    create_before_destroy = true
+  }
+}
 
 
+```
 
 
+create_before_destroy 
 
+prevent_destroy
+
+ignore_changes
+
+
+provisioner and connection
 
 
 
