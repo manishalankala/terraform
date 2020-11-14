@@ -1,6 +1,34 @@
 
 
 
+Resource
+
+<RESOURCE TYPE>.<NAME>.<ATTRIBUTE>
+
+Providers
+
+
+The depends_on argument should be used only as a last resort
+
+depends_on = [
+    aws_iam_role_policy.example,
+  ]
+}
+
+## Resource Arguments
+
+Types and Values : string,number,bool,list,map
+
+
+
+
+
+
+
+
+
+
+
 ## Scope 
 
 Confirm what resources need to be created for a given project.
