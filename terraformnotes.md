@@ -1,6 +1,27 @@
 
 
 
+
+Configuration blocks
+| ------------- |
+| Resources |
+| Provider Requirements |
+| Provider configuration |
+| Input Variables |
+| Output Values |
+| Local Values |
+| Modules |
+| Data Sources  |
+| Backend Configuration |
+| Terraform Settings |
+| Provisioners |
+
+
+
+
+
+
+
 Resource
 
 <RESOURCE TYPE>.<NAME>.<ATTRIBUTE>
@@ -50,6 +71,16 @@ ignore_changes
 provisioner and connection
 
 
+
+
+Input Variables
+
+
+Identifiers can contain letters, digits, underscores (_), and hyphens (-). The first character of an identifier must not be a digit, to avoid ambiguity with literal numbers.
+
+
+
+The name of a variable can be any valid identifier except the following: - source,version,providers,count,for_each,lifecycle,depends_on,locals
 
 
 ## Scope 
