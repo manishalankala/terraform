@@ -12,7 +12,7 @@ parameters:
 jobs:
   - deployment: deploy_terraform
     continueonError: false
-    environment: 'dev'
+    environment: ${{ parameters.deployEnv }}
     strategy: 
     runOnce: 
       deploy:
