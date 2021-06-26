@@ -24,9 +24,9 @@ jobs:
         command: 'init'
         backendServiceArm: ${{ parameters.serviceprincipal}}
         backendAzureRmResourceGroupName: ${{ parameters.resourcegroup }}
-        backendAzureRmStorageAccountName: ${{ parameters }}
-        backendAzureRmContainerName: ${{ parameters }}
-        backendAzureRmkey: 'terraform.tfstate'
+        backendAzureRmStorageAccountName: ${{ parameters.storageAccountName }}
+        backendAzureRmContainerName: ${{ parameters.storageContainerName }}
+        backendAzureRmkey: ${{ parameters.storagekey }}
         
     - task: TerraformTaskv1@0
       displayname: 'validate'
