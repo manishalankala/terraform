@@ -52,7 +52,9 @@ stages:
         - task: TerraformtaskV1@0
           displayName: 'init'
           inputs:
-            terraformVersion: '0.12.19'   
+            terraformVersion: '0.12.19' 
+            
+            
         - task: TerraformtaskV1@0
           displayName: init
           inputs: 
