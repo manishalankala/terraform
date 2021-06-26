@@ -11,12 +11,10 @@ jobs:
   - job: validate
     continueOnError: false
     steps:
-    
     - task: TerraformInstaller@0
       displayName: 
       inputs:
         terraformVersion: ${{ parameters.terraformVersion }}
-        
     - task: TerraformtaskV1@0
       displayName: init
       inputs: 
@@ -27,7 +25,6 @@ jobs:
         backendAzureRmStorageAccountName: ${{ parameters.storageAccountName }}
         backendAzureRmContainerName: ${{ parameters.storageContainerName }}
         backendAzureRmkey: ${{ parameters.storagekey }}
-        
     - task: TerraformTaskv1@0
       displayname: 'validate'
       inputs:
