@@ -37,10 +37,10 @@ jobs:
            inputs:
             provider: 'azurerm'
             command: 'plan'
-            environmentServicenameAzureRM: ''
+            environmentServicenameAzureRM: ${{ parameters.serviceprincipal }}
           - task: TerraformTaskV1@0
             displayName: 'apply'
             inputs:
               provider: 'azurerm'
               command: 'apply'
-              environmentServicenameAzureRM: ''
+              environmentServicenameAzureRM: ${{ parameters.serviceprincipal }}
