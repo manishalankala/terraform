@@ -5,6 +5,7 @@ parameters:
   storageAccountName: ''
   storageContainerName: ''
   storageKey: ''
+  deployEnv: ''
 
 
 
