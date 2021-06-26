@@ -1,5 +1,5 @@
 parameters:
-  terraformversion: '0.12.19
+  terraformversion: '0.12.19'
   serviceprincipal: ''
   resourcegroup: ''
   storageAccountName: ''
@@ -18,39 +18,29 @@ jobs:
       deploy:
       steps:
         - checkout: self
-        
-        
         - task: TerraformtaskV1@0
           displayName: 'init'
           inputs:
-            terraformVersion: '0.12.19' 
-            
-            
+            terraformVersion: ${{ parameters.terraformversion }}
         - task: TerraformtaskV1@0
           displayName: init
           inputs: 
             provider: 'azurerm'
             command: 'init'
-            backendServiceArm: ''
-            backendAzureRmResourceGroupName: ''
-            backendAzureRmStorageAccountName: ''
-            backendAzureRmContainerName: ''
-            backendAzureRmkey: 'terraform.tfstate'
-            
-            
-            
+            backendServiceArm: ${{ parameters.serviceprincipal}}            
+            backendAzureRmResourceGroupName: ${{ parameters.resourcegroup }}           
+            backendAzureRmStorageAccountName: ${{ parameters.storageAccountName }}
+            backendAzureRmContainerName: ${{ parameters.storageContainerName }}
+            backendAzureRmkey: ${{ parameters.storageKey }}
          - task: TerraformtaskV1@0
            displayName: 'plan'
            inputs:
             provider: 'azurerm'
             command: 'plan'
             environmentServicenameAzureRM: ''
-            
-            
-            
           - task: TerraformTaskV1@0
             displayName: 'apply'
             inputs:
-              provider: ''
+              provider: 'azurerm'
               command: 'apply'
               environmentServicenameAzureRM: ''
