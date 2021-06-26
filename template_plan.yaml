@@ -1,0 +1,7 @@
+parameters:
+  terraformversion: '0.12.19
+  serviceprincipal: ''
+  resourcegroup: ''
+  storageAccountName: ''
+  storageContainerName: ''
+  storageKey: ''
