@@ -17,7 +17,7 @@ jobs:
       storageKey: 'terraform.tfstate'
       deployEnv: 'dev'  
           
-  - template: terraform_validate.yaml@templates
+  - template: terraform_plan.yaml@templates
     parameters:
       terraformversion: '0.12.19'
       serviceprincipal: 'azuresp'
