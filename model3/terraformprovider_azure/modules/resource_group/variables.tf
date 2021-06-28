@@ -15,8 +15,14 @@ variable "resource_group_name" {
 }
 
 
-variable "environment" {
-  type = string
+variable "environment_map" {
+  type = map  
+  default = {
+    dev     = “dev”
+    test    = “test”
+    preprod = “preprod”
+    prod    = “prod”
+  }
 }
 
 locals {
