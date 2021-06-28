@@ -1,7 +1,7 @@
 variable "client_config" {}
 
 variable "resource_group" {
-  description = "(Required) Map of the resource groups to create"
+  description = "Map of the resource groups to create"
   type        = string
 }
 
