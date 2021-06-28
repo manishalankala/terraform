@@ -21,4 +21,9 @@ variable "environment" {
 
 locals {
   name-prefix = "${var.project_name}-${var.environment}"
+  envdev = DEV
+  envtest = TEST
+  envpreprod = PREPROD
+  envprod = PROD
+  
 }
