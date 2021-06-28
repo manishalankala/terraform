@@ -1,5 +1,5 @@
 resource "azurerm_resource_group" "devrg" {
-    name     = "myResourceGroup"
+    name     = "dev_resourcegroup"
     location = "${var.location}"
 
     tags {
