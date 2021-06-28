@@ -31,3 +31,24 @@ As we work on our infrastructure, other collaborators might need to modify the i
 Terraform supports multiple Backends to store this file, like etcd, azurem, S3 or Consul.
 
 as Infrastructure grows and you need to define multiple environments, you might need to split your Terraform state by environments and by components inside each environment. This way you will be able to work on different environments at the same time and multiple collaborators could work on different components of the same Infrastructure without being locked
+
+
+```
+# my_infra/prod/database/main.tf:
+		...
+		key			= "prod/database/terraform.tfstate"
+		...
+# my_infra/dev/database/main.tf:
+		...
+		key			= "dev/database/terraform.tfstate"
+		...
+# my_infra/dev/loadbalancer/main.tf:
+		...
+		key			= "dev/loadbalancer/terraform.tfstate"
+
+
+```		
+		
+3.DEFINING OUTPUTS		
+
+Outputs show the information needed after Terraform templates are deployed. They are also used within modules to export information.
