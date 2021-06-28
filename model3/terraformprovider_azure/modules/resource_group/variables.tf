@@ -10,6 +10,15 @@ variable "tags" {
 variable "settings" {}
 
 variable "resource_group_name" {
-  description = "(Required) The name of the resource group where to create the resource."
+  description = "The name of the resource group where to create the resource."
   type        = string
+}
+
+
+variable "environment" {
+  type = string
+}
+
+locals {
+  name-prefix = "${var.project_name}-${var.environment}"
 }
