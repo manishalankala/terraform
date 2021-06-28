@@ -1,5 +1,5 @@
 
-1. env
-2. infra
-3. modules
-4. pipeline
+1. env = / tfvar files
+2. infra  = main.tf,variables.tf,outputs
+3. modules =
+4. pipeline = yaml
