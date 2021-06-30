@@ -1,0 +1,17 @@
+
+- stage: Test
+  displayName: Test
+  jobs:
+  - deployment: deploy
+    environment: Test
+    pool:
+      vmImage: ubuntu-latest
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - checkout: self
+          - task: TerraformInstaller@0
+            displayName: Install Terraform
+            inputs:
+              terraformVersion: 'latest'
