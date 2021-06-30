@@ -1,0 +1,6 @@
+aws_access_key = "XXXXXXXXXXXXXXXXXXXX"
+aws_secret_key = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+aws_key_path = "~/.ssh/bosh.pem"
+aws_key_name = "XXXXXX"
+aws_region = "us-east-1"
+network = "X.X.X.X"
