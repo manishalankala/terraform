@@ -1,25 +1,25 @@
-
-## 1. resource
-## 2. Location
-## 3. tags
-## 4. environment
-
+#### 1. resource
 
 variable "resource_group_name" {
   type   = string
 }
 
+##### 2. Location
+
 variable "location" {
   type   = string
 }
+
+#### 3. tags
 
 variable "tags" {
   type        = map(any)
 }
 
+#### 4. environment
+
 variable "environment" {
   type        = string
-  description = "environment the resources are supporting (ex. dev, stg, prod, ...)"
 }
 
 
