@@ -12,7 +12,7 @@ tag_environment            = "dev"
 tag_dept                   = "netflixdevops"
 tag_project                = "netflixcloud"
 tag_application            = "netflixcloudapp"
-
+prefix                     = "NETFLIX"
 
 
 
