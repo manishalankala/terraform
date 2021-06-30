@@ -8,13 +8,11 @@ azure_location             = "YOUR_AZURE_LOCATION"
 hub                        = "netflix-hub"
 hub_vnet_address_space     = ["172.16.0.0/24"]
 location                   = "West Europe"
-tag_environment            = "dev"
-tag_dept                   = "netflixdevops"
-tag_project                = "netflixcloud"
-tag_application            = "netflixcloudapp"
+environment                = "dev"
+dept_name                  = "netflixdevops"
+project_name               = "netflixcloud"
+application_name           = "netflixcloudapp"
 prefix                     = "NETFLIX"
-
-
 
 
 
