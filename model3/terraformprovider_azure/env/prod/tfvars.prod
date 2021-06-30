@@ -8,7 +8,6 @@ hub                        = "netflix-hub"
 hub_vnet_address_space     = ["172.16.0.0/24"]
 location                   = "West Europe"
 tag_environment            = "prod"
-tag_environment            = "dev"
 tag_dept                   = "netflixdevops"
 tag_project                = "netflixcloud"
 tag_application            = "netflixcloudapp"
