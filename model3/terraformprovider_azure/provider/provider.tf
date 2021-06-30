@@ -18,4 +18,13 @@ provider "azurerm" {
   
 
 
+  #// Set to true if using Managed Identity: https://www.terraform.io/docs/providers/azurerm/guides/managed_service_identity.html
+  #use_msi = false
+
+  #// Set if using Service Principal: https://www.terraform.io/docs/providers/azurerm/guides/service_principal_client_secret.html
+  #// tenant_id       = ""
+  #// subscription_id = ""
+  #// client_id       = ""
+  #// client_secret   = ""
+  #// (Or use environment variables if running in a CI/CD pipeline.)
 
