@@ -3,8 +3,30 @@ variable "client_id" {}
 variable "client_secret" {}
 variable "tenant_id" {}
 variable "location" {
-    default = "West US"
+    default = "West Europe"
 }
+
+
+variable "subscription_id" {
+  default = ""
+}
+
+variable "client_id" {
+  default = ""
+}
+
+variable "client_secret" {
+  default = ""
+}
+
+variable "key_name" {
+}
+
+
+variable "tenant_id" {
+  default = ""
+}
+
 
 variable "global_settings" {
   description = "Global settings object"
