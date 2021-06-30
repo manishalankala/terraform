@@ -45,10 +45,23 @@ variable "tag_project" {
 }
 
 
+variable "location" {
+  type    = string
+  default = ""
+}
+
+
+
 variable "prefix" {
   description = "prefix will be included in the name of some resources."
   default     = "Netflix"
 }
+
+
+variable "resource_group_name" {
+  type = string
+}
+
 
 
 variable "virtual_network_name" {
@@ -56,15 +69,36 @@ variable "virtual_network_name" {
   default     = "vnet"
 }
 
-variable "address_space" {
+
+
+variable "vnet_cidr_range" {
   description = "The address space that is used by the virtual network. You can supply more than one address space. Changing this forces a new resource to be created."
+  type        =  string
   default     = "10.0.0.0/16"
+  
 }
+
+
+variable "subnet_names" {
+  type    = list(string)
+  default = ["web", "database"]
+}
+
 
 variable "subnet_prefix" {
   description = "The address prefix to use for the subnet."
   default     = "10.0.10.0/24"
 }
+
+
+
+
+
+#variable "subnet_prefixes" {
+#  type    = list(string)
+#  default = ["10.0.0.0/24", "10.0.1.0/24", "10.0.2.0/24"]
+#}
+
 
 
 variable "storage_account_tier" {
@@ -122,6 +156,12 @@ variable "source_network" {
   description = "Allow access from this network prefix. Defaults to '*'."
   default     = "*"
 }
+
+
+
+
+
+
 
 
 
