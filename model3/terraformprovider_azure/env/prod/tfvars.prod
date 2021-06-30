@@ -7,4 +7,4 @@ azure_location             = "YOUR_AZURE_LOCATION"
 hub                        = "dev-hub"
 hub_vnet_address_space     = ["172.16.0.0/24"]
 location                   = "West Europe"
-tag_environment            = "dev"
+tag_environment            = "prod"
