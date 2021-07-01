@@ -15,6 +15,8 @@ resource "azurerm_dns_zone" "add_zone_public" {
 }
 
 
+# Create record
+
 resource "azurerm_dns_cname_record" "add_dns_cnamerecord" {
   name                    = "${var.prefix}-cname-record"
   zone_name               = azurerm_dns_zone.add_zone_public.name
