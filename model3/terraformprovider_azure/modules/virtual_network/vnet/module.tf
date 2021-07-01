@@ -1,3 +1,8 @@
+
+
+
+# Create resource group
+
 resource "azurerm_resource_group" "add_resource_group" {
   name         = "${var.prefix}-resource_group"
   location     = var.location
@@ -6,6 +11,7 @@ resource "azurerm_resource_group" "add_resource_group" {
 }
 
 
+# Create Network secuirty group
 
 resource "azurerm_network_security_group" "add_network_security_group" {
   name                = "${var.prefix}-network_security_group"
@@ -14,6 +20,7 @@ resource "azurerm_network_security_group" "add_network_security_group" {
 }
 
 
+# Create ddos 
 
 resource "azurerm_network_ddos_protection_plan" "add_ddos" {
   name                = "ddospplan1"
@@ -21,6 +28,8 @@ resource "azurerm_network_ddos_protection_plan" "add_ddos" {
   resource_group_name = azurerm_resource_group.add_resource_group.name
 }
 
+
+# Create Vnet
 
 resource "azurerm_virtual_network" "add_virtual_network" {
   name                = "${var.prefix}-virtual_network"
@@ -36,7 +45,8 @@ resource "azurerm_virtual_network" "add_virtual_network" {
   }
   
 
-   
+# Create Subnets under Vnet
+  
 subnets = {
     appg_subnet = {
       subnet_name                 = "appgateway-subnet"
