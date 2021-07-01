@@ -17,15 +17,15 @@ resource "azurerm_network_security_group" "add_nsg_ssh" {
   resource_group_name = azurerm_resource_group.add_resource_group.name
 
   security_rule {
-    name                       = "allow-ssh"
-    priority                   = 100
-    direction                  = "Inbound"
-    access                     = "Allow"
-    protocol                   = "Tcp"
-    source_port_range          = "*"
-    destination_port_range     = "22"
-    source_address_prefix      = "0.0.0.0/0"
-    destination_address_prefix = "*"
+    name                            = "allow-ssh"
+    priority                        = 100
+    direction                       = "Inbound"
+    access                          = "Allow"
+    protocol                        = "Tcp"
+    source_port_range               = "*"
+    destination_port_range          = "22"
+    source_address_prefix           = "0.0.0.0/0"
+    destination_address_prefix      = "*"
   }
 
 # Create nsg http 
@@ -50,9 +50,9 @@ resource "azurerm_network_security_group" "add_nsg_http" {
 # Create nsg https   
   
 resource "azurerm_network_security_group" "add_nsg_https" {
-  name                = "${var.prefix}-networksecuritygroup-https"
-  location            = var.location
-  resource_group_name = azurerm_resource_group.add_resource_group.name
+  name                            = "${var.prefix}-networksecuritygroup-https"
+  location                        = var.location
+  resource_group_name             = azurerm_resource_group.add_resource_group.name
 
   security_rule {
     name                           = "allow-https"
