@@ -49,8 +49,8 @@ subnets = {
     mgmt_subnet = {
       subnet_name                 = "management-subnet"
       subnet_address_prefix       = ["10.0.2.0/22"]
-      resource_group_name         = azurerm_resource_group.example.name
-      virtual_network_name        = azurerm_virtual_network.example.name
+      resource_group_name         = azurerm_resource_group.add_resource_group.name
+      virtual_network_name        = azurerm_virtual_network.add_virtual_network.name
       service_endpoints           = ["Microsoft.Storage"]
     }
     
