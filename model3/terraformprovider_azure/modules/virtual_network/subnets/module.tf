@@ -19,7 +19,7 @@ resource "azurerm_subnet" "add_subnet" {
   resource_group_name       = azurerm_resource_group.add_resource_group.name
   virtual_network_name      = azurerm_virtual_network.add_virtual_network.name
   address_prefixes          = ["10.0.1.0/22"]
-
+  depends_on                = ["azurerm_virtual_network.add_virtual_network"]
 
 
 resource "azurerm_subnet" "add_subnet" {
@@ -27,14 +27,16 @@ resource "azurerm_subnet" "add_subnet" {
   resource_group_name       = azurerm_resource_group.add_resource_group.name
   virtual_network_name      = azurerm_virtual_network.add_virtual_network.name
   address_prefixes          = ["10.0.2.0/22"]
+  depends_on                = ["azurerm_virtual_network.add_virtual_network"]
 
      
   
 resource "azurerm_subnet" "add_subnet" {
-  name                      = "resource-subnet"
+  name                      = "shared-subnet"
   resource_group_name       = azurerm_resource_group.add_resource_group.name
   virtual_network_name      = azurerm_virtual_network.add_virtual_network.name
   address_prefixes          = ["10.0.3.0/22"]
+  depends_on                = ["azurerm_virtual_network.add_virtual_network"]
   
   
   delegation {
