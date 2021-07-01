@@ -15,9 +15,7 @@ dept_name                  = "netflixdevops"
 project_name               = "netflixcloud"
 application_name           = "netflixcloudapp"
 prefix                     = "NETFLIX"
-
-
-
+vnet_address_space         = ["10.0.0.0/16"]
 ########################################################################################################
 
 
