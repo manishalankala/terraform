@@ -1,0 +1,23 @@
+# Create resource group
+
+resource "azurerm_resource_group" "add_resource_group" {
+  name         = "${var.prefix}-resource_group"
+  location     = var.location
+  tags         = var.tags
+  enviroment   = var.environment
+}
+
+
+resource "azurerm_dns_zone" "add_dns_arecord" {
+  name                    = "netflix.com"
+  resource_group_name     = azurerm_resource_group.add_resource_group.name
+}
+
+
+resource "azurerm_dns_a_record" "add_dns_arecord" {
+  name                   = "${var.prefix}-a-record"
+  zone_name              = azurerm_dns_zone.add_dns_arecord.name
+  resource_group_name    = azurerm_resource_group.add_resource_group.name
+  ttl                    = 300
+  records                = ["10.0.180.17"]
+}
