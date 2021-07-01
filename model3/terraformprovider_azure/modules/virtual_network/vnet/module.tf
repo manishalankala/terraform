@@ -14,29 +14,29 @@ resource "azurerm_resource_group" "add_resource_group" {
 # Create Network secuirty group
 
 resource "azurerm_network_security_group" "add_network_security_group" {
-  name                = "${var.prefix}-network_security_group"
-  location            = var.location
-  resource_group_name = azurerm_resource_group.add_resource_group.name
+  name                    = "${var.prefix}-network_security_group"
+  location                = var.location
+  resource_group_name     = azurerm_resource_group.add_resource_group.name
 }
 
 
 # Create ddos 
 
 resource "azurerm_network_ddos_protection_plan" "add_ddos" {
-  name                = "ddospplan1"
-  location            = var.location
-  resource_group_name = azurerm_resource_group.add_resource_group.name
+  name                    = "ddospplan1"
+  location                = var.location
+  resource_group_name     = azurerm_resource_group.add_resource_group.name
 }
 
 
 # Create Vnet
 
 resource "azurerm_virtual_network" "add_virtual_network" {
-  name                = "${var.prefix}-virtual_network"
-  location            = azurerm_resource_group.example.location
-  resource_group_name = azurerm_resource_group.example.name
-  address_space       = ["10.0.0.0/16"]
-  dns_servers         = ["10.0.0.4", "10.0.0.5", "8.8,8.8", "1.1.1.1" ]
+  name                    = "${var.prefix}-virtual_network"
+  location                =  var.location
+  resource_group_name     = azurerm_resource_group.add_resource_group.name
+  address_space           = ["10.0.0.0/16"]
+  dns_servers             = ["10.0.0.4", "10.0.0.5", "8.8,8.8", "1.1.1.1" ]
   
   
   ddos_protection_plan {
