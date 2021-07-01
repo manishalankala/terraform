@@ -9,7 +9,7 @@ variable "azurerm_network_security_group" {
 
 
 variable "subnets" {
-  type   = list[string]
+  type   = list(string)
 }
 
 
