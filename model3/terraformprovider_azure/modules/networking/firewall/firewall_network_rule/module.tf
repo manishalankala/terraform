@@ -51,8 +51,10 @@ resource "azurerm_firewall" "add_firewall" {
   }
 }
 
+## Create fw network rule
 
-resource "azurerm_firewall_network_rule_collection" "add_" {
+
+resource "azurerm_firewall_network_rule_collection" "add_fw_network_rule" {
   name                = "${var.prefix}-firewall-network-rule"
   azure_firewall_name = azurerm_firewall.add_firewall.name
   resource_group_name = azurerm_resource_group.add_resource_group.name
