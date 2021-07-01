@@ -16,7 +16,7 @@ resource "azurerm_virtual_network" "add_virtual_network" {
   resource_group_name     = azurerm_resource_group.add_resource_group.name
   address_space           = ["10.0.0.0/16"]
   dns_servers             = ["10.0.0.4", "10.0.0.5", "8.8,8.8", "1.1.1.1" ]
- 
+} 
     
 # Create subnet
   
