@@ -123,3 +123,24 @@ resource "azurerm_network_security_group" "add_nsg_winrm" {
     source_address_prefix          = "0.0.0.0/0"
     destination_address_prefix     = "*"
   } 
+
+  
+  
+# Create nsg outbound
+  
+resource "azurerm_network_security_group" "add_nsg_outbound" {
+  name                             = "${var.prefix}-networksecuritygroup-outbound"
+  location                         = var.location
+  resource_group_name              = azurerm_resource_group.add_resource_group.name
+
+  security_rule {
+    name                           = "allow-outbound"
+    priority                       = 105
+    direction                      = "Outbound"
+    access                         = "Allow"
+    protocol                       = "Tcp"
+    source_port_range              = "*"
+    destination_port_range         = ["80,443"]
+    source_address_prefix          = "0.0.0.0/0"
+    destination_address_prefix     = "*"
+  }
