@@ -1,4 +1,7 @@
 
+
+# Create Resource group
+
 resource "azurerm_resource_group" "add_resource_group" {
   name         = "${var.prefix}-resource_group"
   location     = var.location
@@ -6,7 +9,7 @@ resource "azurerm_resource_group" "add_resource_group" {
   enviroment   = var.environment
 }
 
-
+# Create nsg ssh
 
 resource "azurerm_network_security_group" "add_nsg_ssh" {
   name                = "${var.prefix}-networksecuritygroup-ssh"
@@ -25,7 +28,7 @@ resource "azurerm_network_security_group" "add_nsg_ssh" {
     destination_address_prefix = "*"
   }
 
-  
+# Create nsg http 
   
 resource "azurerm_network_security_group" "add_nsg_http" {
   name                = "${var.prefix}-networksecuritygroup-http"
@@ -44,7 +47,7 @@ resource "azurerm_network_security_group" "add_nsg_http" {
     destination_address_prefix     = "*"
   }
   
-  
+# Create nsg https   
   
 resource "azurerm_network_security_group" "add_nsg_https" {
   name                = "${var.prefix}-networksecuritygroup-https"
@@ -63,6 +66,8 @@ resource "azurerm_network_security_group" "add_nsg_https" {
     destination_address_prefix     = "*"
   }
   
+
+# Create nsg rdp   
   
  resource "azurerm_network_security_group" "add_nsg_rdp" {
   name                = "${var.prefix}-networksecuritygroup-rdp"
@@ -81,7 +86,8 @@ resource "azurerm_network_security_group" "add_nsg_https" {
     destination_address_prefix     = "*"
   }
    
-   
+
+# Create nsg ftp
  
 resource "azurerm_network_security_group" "add_nsg_ftp" {
   name                = "${var.prefix}-networksecuritygroup-ftp"
@@ -100,6 +106,8 @@ resource "azurerm_network_security_group" "add_nsg_ftp" {
     destination_address_prefix     = "*"
   }   
 
+  
+# Create nsg winrm
   
 resource "azurerm_network_security_group" "add_nsg_winrm" {
   name                             = "${var.prefix}-networksecuritygroup-winrm"
