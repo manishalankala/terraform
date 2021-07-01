@@ -33,6 +33,7 @@ resource "azurerm_dns_caa_record" "add_dns_caarecord" {
     tag   = "issue"
     value = "netflix.net"
   }
+  
 
   record {
     flags = 0
