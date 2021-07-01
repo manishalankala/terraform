@@ -73,3 +73,32 @@ subnets = {
     }  
      
       
+
+  
+  
+  
+  
+  
+#  resource "azurerm_subnet" "add_appg_subnet"
+#  depends_on           = ["azurerm_virtual_network.add_virtual_network"]
+#  virtual_network_name = var.virtual_network_name
+#  name                 = "appgateway-subnet"
+#  address_prefixes     = ["10.0.1.0/22"]
+#  resource_group_name  = var.resource_group_name
+#}
+
+#resource "azurerm_subnet" "add_mgmt_subnet"
+# depends_on           = ["azurerm_virtual_network.add_virtual_network"]
+# virtual_network_name = var.virtual_network_name
+# name                 = "management-subnet"
+# address_prefixes     = ["10.0.2.0/22"]
+# resource_group_name  = var.resource_group_name
+#
+
+#resource "azurerm_subnet" "add_res_subnet"
+# depends_on           = ["azurerm_virtual_network.add_virtual_network"]
+# virtual_network_name = var.virtual_network_name
+# name                 = "res-subnet"
+# address_prefixes     = ["10.0.3.0/22"]
+# resource_group_name  = var.resource_group_name
+#
