@@ -24,7 +24,7 @@ resource "azurerm_subnet" "add_fw_subnet" {
   name                   = "AzureFirewallSubnet"
   resource_group_name    = azurerm_resource_group.add_resource_group.name
   virtual_network_name   = azurerm_virtual_network.add_virtual_network.name
-  address_prefixes       = ["10.0.1.0/22"]  
+  address_prefixes       = ["10.0.4.0/22"]  
 }
 
 # Create publicip
