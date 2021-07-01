@@ -16,7 +16,7 @@ resource "azurerm_dns_zone" "add_zone_public" {
 
 
 resource "azurerm_dns_aaaa_record" "add_dns_aaaarecord" {
-  name                    = "test"
+  name                    = "${var.prefix}-aaaa-record"
   zone_name               = azurerm_dns_zone.add_zone_public.name
   resource_group_name     = azurerm_resource_group.add_resource_group.name
   ttl                     = 300
