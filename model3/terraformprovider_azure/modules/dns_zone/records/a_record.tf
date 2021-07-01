@@ -7,6 +7,7 @@ resource "azurerm_resource_group" "add_resource_group" {
   enviroment   = var.environment
 }
 
+# Create zone
 
 resource "azurerm_dns_zone" "add_zone_public" {
   name                    = "netflix.com"
@@ -14,8 +15,7 @@ resource "azurerm_dns_zone" "add_zone_public" {
 }
 
 
-
-
+# Create record 
 
 resource "azurerm_dns_a_record" "add_dns_arecord" {
   name                    = "${var.prefix}-a-record"
