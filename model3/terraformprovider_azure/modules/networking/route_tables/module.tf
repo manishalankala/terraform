@@ -1,4 +1,4 @@
-# Create resource group
+## Create resource group
 
 resource "azurerm_resource_group" "add_resource_group" {
   name         = "${var.prefix}-resource_group"
@@ -6,6 +6,8 @@ resource "azurerm_resource_group" "add_resource_group" {
   tags         = var.tags
   enviroment   = var.environment
 }
+
+## Create route table & routes
 
 resource "azurerm_route_table" "add-routetable" {
   name                          = "${var.prefix}-routetable"
