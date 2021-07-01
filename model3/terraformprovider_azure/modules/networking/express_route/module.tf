@@ -30,7 +30,7 @@ resource "azurerm_express_route_circuit" "add_expressroute" {
 }
 
 resource "azurerm_express_route_circuit_authorization" "add_expressrouteauth" {
-  name                       = "exampleERCAuth"
+  name                       = "${var.prefix}--express-route-auth"
   express_route_circuit_name = azurerm_express_route_circuit.add_expressroute.name
   resource_group_name        = azurerm_resource_group.add_resource_group.name
 }
