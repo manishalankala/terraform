@@ -40,6 +40,7 @@ variable "vnet_cidr" {
 }  
   
 variable "create_ddos_plan" {
+  type        = bool  
   default     = false
 }  
 
