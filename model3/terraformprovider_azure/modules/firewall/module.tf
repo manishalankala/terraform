@@ -40,7 +40,7 @@ resource "azurerm_public_ip" "add-publicip" {
 # Create firewall  
   
 resource "azurerm_firewall" "add_firewall" {
-  name                = "${var.prefix}-firewall"
+  name                = "${var.prefix}-firewall-subnet"
   location            = var.location
   resource_group_name = azurerm_resource_group.add_resource_group.name
   
