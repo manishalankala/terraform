@@ -42,6 +42,15 @@ resource "azurerm_subnet" "add_subnet" {
   virtual_network_name      = azurerm_virtual_network.add_virtual_network.name
   address_prefixes          = ["10.0.3.0/22"]
   depends_on                = ["azurerm_virtual_network.add_virtual_network"]
+ 
+## Create subnet 4 
+  
+resource "azurerm_subnet" "add_subnet" {
+  name                      = "firewall-subnet"
+  resource_group_name       = azurerm_resource_group.add_resource_group.name
+  virtual_network_name      = azurerm_virtual_network.add_virtual_network.name
+  address_prefixes          = ["10.0.4.0/22"]
+  depends_on                = ["azurerm_virtual_network.add_virtual_network"]  
   
   
   delegation {
