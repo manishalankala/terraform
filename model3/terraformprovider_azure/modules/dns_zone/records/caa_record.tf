@@ -7,27 +7,31 @@ resource "azurerm_resource_group" "add_resource_group" {
   enviroment   = var.environment
 }
 
+# Create zone
 
-resource "azurerm_dns_zone" "add_dns_arecord" {
+resource "azurerm_dns_zone" "add_zone_public" {
   name                    = "netflix.com"
   resource_group_name     = azurerm_resource_group.add_resource_group.name
 
-resource "azurerm_dns_caa_record" "add_dns" {
+  
+# Create record 
+  
+resource "azurerm_dns_caa_record" "add_dns_caarecord" {
   name                = "test"
-  zone_name           = azurerm_dns_zone.example.name
-  resource_group_name = azurerm_resource_group.example.name
+  zone_name           = azurerm_dns_zone.add_zone_public.name
+  resource_group_name = azurerm_resource_group.add_resource_group.name
   ttl                 = 300
 
   record {
     flags = 0
     tag   = "issue"
-    value = "example.com"
+    value = "netflix.com"
   }
 
   record {
     flags = 0
     tag   = "issue"
-    value = "example.net"
+    value = "netflix.net"
   }
 
   record {
@@ -42,7 +46,7 @@ resource "azurerm_dns_caa_record" "add_dns" {
     value = "mailto:terraform@nonexisting.tld"
   }
 
-  tags = {
-    Environment = "Production"
-  }
+  #tags = {
+  #  Environment = "Production"
+  #}
 }
