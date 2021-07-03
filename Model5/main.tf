@@ -157,6 +157,9 @@ resource "azurerm_log_analytics_solution" "add_log_analytics" {
 
 
 ########################################### Diagnostic Settings ###########################################
+## To send diagnostic settings of the Application Gateway to the Log Analytics Workspace.
+
+
 
 resource "azurerm_monitor_diagnostic_setting" "agw" {
   name                       = "${local.prefix}-hub-agw1-diag"
