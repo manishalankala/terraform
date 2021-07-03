@@ -1,8 +1,8 @@
 
 
 
-# - Application Gateway
-# -
+########################################## Application Gateway ########################################
+
 
 resource "azurerm_application_gateway" "agw" {
   depends_on          = [azurerm_key_vault_certificate.website1, time_sleep.wait_60_seconds]
@@ -131,7 +131,7 @@ resource "azurerm_application_gateway" "agw" {
 
 
 
-# - Log Analytics Workspace
+########################################### Log Analytics Workspace ##########################################################################
 # -
 resource "azurerm_log_analytics_workspace" "add_log_workspace" {
   name                = "${local.prefix}-hub-logaw1"
