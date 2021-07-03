@@ -1,5 +1,24 @@
 
 
+
+Azure Firewall alone when there are no web applications in the virtual network.
+
+Application Gateway alone when there are only web applications in the virtual network, and network security groups (NSGs) provide sufficient output filtering.
+
+Azure Firewall and Application Gateway in parallel, the most common design, when you want Azure Application Gateway to protect HTTP(S) applications from web attacks, and Azure Firewall to protect all other workloads and filter outbound traffic.
+
+Application Gateway in front of Azure Firewall when you want Azure Firewall to inspect all traffic and WAF to protect web traffic, and the application needs to know the client's source IP address.
+
+Azure Firewall in front of Application Gateway when you want Azure Firewall to inspect and filter traffic before it reaches the Application Gateway.
+
+
+
+
+
+
+
+
+
 1.USE MODULES TO AVOID REPETITIVE WORK
 
 Modules in Terraform allow you to reuse predefined resource structures. 
