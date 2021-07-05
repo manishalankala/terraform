@@ -1,5 +1,7 @@
 
-
+#########################
+##### HUB  #####
+#########################
 
 
 # Create a Resource Group
@@ -71,6 +73,13 @@ resource "azurerm_virtual_network_peering" "hub--peering-spoke2" {
 
 
 
+
+#################################
+##### PublicIp & Point to site Vpn
+##################################
+
+
+
 # Create a Public IP for the Gateway
 
 resource "azurerm_public_ip" "public-gateway-ip" {
@@ -137,7 +146,9 @@ EOF
 }
 
 
-
+#########################
+##### SPOKE1  #####
+#########################
 
 # Create the SPOKE1-VNET
 
@@ -182,6 +193,11 @@ resource "azurerm_virtual_network_peering" "spoke1-peering-hub" {
 }
 
 
+
+#########################
+##### SPOKE1  #####
+#########################
+
 # Create the SPOKE2-VNET
 
 resource "azurerm_virtual_network" "spoke2-vnet" {
@@ -194,7 +210,7 @@ resource "azurerm_virtual_network" "spoke2-vnet" {
   }
 }
 
-# Create a SPOKE1-Subnet1
+# Create a SPOKE2-Subnet1
 
 resource "azurerm_subnet" "spokeone-subnet" {
   name                 = "spoke2-subnet" # do not rename
@@ -203,7 +219,7 @@ resource "azurerm_subnet" "spokeone-subnet" {
   resource_group_name  = azurerm_resource_group.hub-rg.name
 }
 
-# Create a SPOKE1-Subnet2
+# Create a SPOKE2-Subnet2
 
 resource "azurerm_subnet" "spoketwo-subnet" {
   name                 = "spoke2-subnet" # do not rename
