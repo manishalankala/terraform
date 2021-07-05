@@ -23,14 +23,9 @@ variable "azure-tenant-id" {
   description = "Azure Tenant ID"
 }
 
-
-
-
-
-
-
-
-
+#########################
+## Network - Variables ##
+#########################
 
 variable "hub-vnet" {
   type        = string
