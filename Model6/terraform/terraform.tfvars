@@ -11,7 +11,8 @@ azure-tenant-id       = "xxxxxxxxxxxx"
 ####################
 # Common Variables #
 ####################
-app_name    = "appvpngw"
+
+app_name    = "Model6"
 company     = "appcloud"
 prefix      = "app"
 environment = "dev"
