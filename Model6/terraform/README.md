@@ -22,3 +22,5 @@ openssl req -newkey rsa:4096 -x509 -sha256 -days 5000 -nodes -out example.crt -k
 Ref:
 
 https://docs.microsoft.com/en-us/azure/vpn-gateway/point-to-site-vpn-client-configuration-azure-cert#linuxinstallcli
+
+https://tidbytez.com/2021/03/08/how-to-create-a-self-signed-root-certificate-and-configure-a-point-to-site-azure-vpn-connection/
