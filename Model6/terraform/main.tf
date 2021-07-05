@@ -44,6 +44,30 @@ resource "azurerm_subnet" "hub-subnet" {
 
 
 
+resource "azurerm_virtual_network_peering" "hub-peering-spoke1" {
+  name                      = "hub-spoke1"
+  resource_group_name       = azurerm_resource_group.hub-rg.name
+  virtual_network_name      = azurerm_virtual_network.hub-vnet.name
+  remote_virtual_network_id = azurerm_virtual_network.spoke1-vnet.id
+  allow_virtual_network_access = true
+  allow_forwarded_traffic = true
+  allow_gateway_transit   = true
+  use_remote_gateways     = false
+  depends_on = [azurerm_virtual_network.spoke1-vnet, azurerm_virtual_network.hub-vnet , azurerm_virtual_network_gateway.vpn-gateway]
+}
+
+
+resource "azurerm_virtual_network_peering" "hub--peering-spoke2" {
+  name                      = "hub-spoke2"
+  resource_group_name       = azurerm_resource_group.hub-rg.name
+  virtual_network_name      = azurerm_virtual_network.hub-vnet.name
+  remote_virtual_network_id = azurerm_virtual_network.spoke2-vnet.id
+  allow_virtual_network_access = true
+  allow_forwarded_traffic = true
+  allow_gateway_transit   = true
+  use_remote_gateways     = false
+  depends_on = [azurerm_virtual_network.spoke2-vnet, azurerm_virtual_network.hub-vnet , azurerm_virtual_network_gateway.vpn-gateway]
+}
 
 
 
