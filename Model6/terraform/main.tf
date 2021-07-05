@@ -90,3 +90,70 @@ resource "azurerm_virtual_network_gateway" "vpn-gateway" {
 
   }
 }
+
+
+
+
+# Create the SPOKE1-VNET
+
+resource "azurerm_virtual_network" "spoke1-vnet" {
+  name                = "${var.region}-${var.environment}-${var.app_name}-spoke1-vnet"
+  address_space       = [var.spoke1-vnet]
+  location              = azurerm_resource_group.hub-rg.location
+  resource_group_name   = azurerm_resource_group.hub-rg.name
+  tags = {
+    environment = var.environment
+  }
+}
+
+# Create a SPOKE1-Subnet1
+
+resource "azurerm_subnet" "spokeone-subnet" {
+  name                 = "spoke1-subnet" # do not rename
+  address_prefixes     = [var.spoke1-subnet1]
+  virtual_network_name = azurerm_virtual_network.spoke1-vnet.name
+  resource_group_name  = azurerm_resource_group.hub-rg.name
+}
+
+# Create a SPOKE1-Subnet2
+
+resource "azurerm_subnet" "spoketwo-subnet" {
+  name                 = "spoke2-subnet" # do not rename
+  address_prefixes     = [var.spoke1-subnet1]
+  virtual_network_name = azurerm_virtual_network.spoke1-vnet.name
+  resource_group_name  = azurerm_resource_group.hub-rg.name
+}
+
+
+
+# Create the SPOKE2-VNET
+
+resource "azurerm_virtual_network" "spoke2-vnet" {
+  name                = "${var.region}-${var.environment}-${var.app_name}-spoke2-vnet"
+  address_space       = [var.spoke1-vnet]
+  location              = azurerm_resource_group.hub-rg.location
+  resource_group_name   = azurerm_resource_group.hub-rg.name
+  tags = {
+    environment = var.environment
+  }
+}
+
+# Create a SPOKE1-Subnet1
+
+resource "azurerm_subnet" "spokeone-subnet" {
+  name                 = "spoke1-subnet" # do not rename
+  address_prefixes     = [var.spoke1-subnet1]
+  virtual_network_name = azurerm_virtual_network.spoke2-vnet.name
+  resource_group_name  = azurerm_resource_group.hub-rg.name
+}
+
+# Create a SPOKE1-Subnet2
+
+resource "azurerm_subnet" "spoketwo-subnet" {
+  name                 = "spoke2-subnet" # do not rename
+  address_prefixes     = [var.spoke1-subnet1]
+  virtual_network_name = azurerm_virtual_network.spoke2-vnet.name
+  resource_group_name  = azurerm_resource_group.hub-rg.name
+}
+
+
