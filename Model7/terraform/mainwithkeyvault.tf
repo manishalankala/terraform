@@ -1,3 +1,8 @@
+
+
+
+data "azurerm_client_config" "current" {}
+
 # Create a Resource Group
 
 resource "azurerm_resource_group" "hub-rg" {
