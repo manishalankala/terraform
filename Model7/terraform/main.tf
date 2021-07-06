@@ -38,7 +38,9 @@ resource "azurerm_subnet" "hub-subnet" {
   resource_group_name  = azurerm_resource_group.hub-rg.name
 }
 
-
+#################################
+##### PublicIp & site to site Vpn
+##################################
 
 
 # Create gateway onprem to Azure 
