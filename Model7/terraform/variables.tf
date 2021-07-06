@@ -77,6 +77,12 @@ variable "spoke2-subnet2" {
 # Azure Key Vault variables #
 #############################
 
+
+# Variable for Certificate Name
+locals {
+  certificate-name = "${var.company}-RootCert.crt"
+}
+
 variable "kv-full-object-id" {
   type        = string
   description = "The object ID of a user, service principal or security group in the Azure Active Directory tenant for FULL access to the Azure Key Vault"
