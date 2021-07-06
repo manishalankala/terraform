@@ -75,7 +75,7 @@ resource "azurerm_virtual_network_gateway" "vpn-gateway" {
   sku           = "Basic"
 
   ip_configuration {
-    name                          = "${var.region}-${var.environment}-${var.app_name}-vnet"
+    name                          = "${var.region}-${var.environment}-${var.app_name}-hub-vnet"
     public_ip_address_id          = azurerm_public_ip.public-gateway-ip.id
     private_ip_address_allocation = "Dynamic"
     subnet_id                     = azurerm_subnet.gateway-subnet.id
