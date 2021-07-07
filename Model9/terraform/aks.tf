@@ -21,7 +21,16 @@ resource "azurerm_kubernetes_cluster" "spoke-aks" {
   max_count            = 3
   }
   
+# Specifying a Service Principal for AKS Cluster
+  
+  service_principal {
+    client_id = "${var.clientid}"
+    client_secret = "${var.clientsecret}"
+  }
+  
+  
   role_based_access_control {
     enabled = true
   }
-   
+}
+
