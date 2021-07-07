@@ -54,6 +54,7 @@ resource "azurerm_kubernetes_cluster" "spoke-aks" {
   min_count            = 1
   max_count            = 3
   max_pods             = var.node_pod_count
+# mode                 = User or System defined
   }
   
   identity {
