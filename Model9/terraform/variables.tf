@@ -52,7 +52,7 @@ variable "kube_version" {
   default = "1.19.10" 
 }
 
-variable "node_count"
+variable "node_count" {
   default = "3"
 }
 
