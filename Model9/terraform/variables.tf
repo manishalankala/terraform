@@ -26,9 +26,6 @@ variable "subscriptionid" {
   default   = "XXX"
 }
 
-
-
-
 variable "resource_group_name" {
   description = "contains the name of the Resource Group"
   default     = "spoke1-rg"
@@ -45,13 +42,28 @@ variable "cluster_name" {
 }
 
 
-variable "vm_size" {
-  default = "Standard_D2_v2"
-}  
+
 
 variable "kube_version" {
   default = "1.19.10" 
 }
 
-node_count
-ode_disk_size
+variable "node_count"
+  default = "3"
+}
+
+variable "node_size" {
+  default = "Standard_D2_v2"
+}  
+
+variable "node_disk_size" {
+  default = "40"
+}
+
+variable "node_pod_count"
+  default = "30"
+}
+
+
+
+
