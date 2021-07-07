@@ -68,6 +68,10 @@ variable "node_pod_count"
   default = "30"
 }
 
+variable "network_plugin" {
+  description = "Kubernetes networking plugin"
+  default     = "kubenet"
+}
 
 
 
