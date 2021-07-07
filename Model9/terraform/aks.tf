@@ -24,7 +24,7 @@ resource "azurerm_kubernetes_cluster" "spoke-aks" {
   max_pods             = var.node_pod_count
   vnet_subnet_id       = azurerm_subnet.subnet_aks.id
   type                 = "VirtualMachineScaleSets"
-  enable_auto_scaling  = true
+  enable_auto_scaling  = false
   min_count            = 1
   max_count            = 3
   }
