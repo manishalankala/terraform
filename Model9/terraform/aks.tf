@@ -1,4 +1,12 @@
-
+provider "azurerm" {
+  # Specifying the version is optional
+  version = "=1.34.0"
+  # Credentials are specified authenticating to Azure
+  client_id = "${var.clientid}"
+  client_secret = "${var.clientsecret}"
+  tenant_id     = "${var.tenantid}"
+  subscription_id = "${var.subscriptionid}"
+}
 
 resource "azurerm_kubernetes_cluster" "spoke-aks" {
   name                = "spoke1-aks"
