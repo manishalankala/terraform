@@ -50,6 +50,7 @@ resource "azurerm_kubernetes_cluster" "spoke-aks" {
   vnet_subnet_id       = azurerm_subnet.subnet_aks.id
   type                 = "VirtualMachineScaleSets"
   enable_auto_scaling  = false
+#  availability_zones  = [1, 2, 3]
   min_count            = 1
   max_count            = 3
   max_pods             = var.node_pod_count
@@ -58,6 +59,12 @@ resource "azurerm_kubernetes_cluster" "spoke-aks" {
   identity {
     type = "SystemAssigned"
   }
+  
+  network_profile {
+  load_balancer_sku = "Standard"
+  network_plugin    = "kubenet" # CNI
+  }
+}
   
 # Specifying a Service Principal for AKS Cluster
   
@@ -68,5 +75,5 @@ resource "azurerm_kubernetes_cluster" "spoke-aks" {
   role_based_access_control {
     enabled = true
   }
-}
+
 
