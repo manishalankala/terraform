@@ -8,22 +8,22 @@
 
 variable "clientid" {
   description = "contains the Client Id for service principal"
-  default   = "XXX"
+  default   = "XXXXXXXXXXXXX"
 }
 
 variable "clientsecret" {
   description = "contains the Client Secret for service principal"
-  default   = "XXX"
+  default   = "XXXXXXXXXXXXXXXX"
 }
 
 variable "tenantid" {
   description = "contains the Tenant Id for service principal"
-  default   = "XXX"
+  default   = "XXXXXXXXXXXXXXXX"
 }
 
 variable "subscriptionid" {
   description = "contains the Subscription Id for service principal"
-  default   = "XXX"
+  default   = "XXXXXXXXXXXXXXXX"
 }
 
 variable "resource_group_name" {
