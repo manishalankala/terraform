@@ -43,3 +43,15 @@ variable "cluster_name" {
   description = "This Contains the name of Azure Container Registry"
   default     = "akscluster"
 }
+
+
+variable "vm_size" {
+  default = "Standard_D2_v2"
+}  
+
+variable "kube_version" {
+  default = "1.19.10" 
+}
+
+node_count
+ode_disk_size
