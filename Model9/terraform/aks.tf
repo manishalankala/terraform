@@ -1,3 +1,8 @@
+######################
+Provider
+######################
+
+
 provider "azurerm" {
   # Specifying the version is optional
   version = "=1.34.0"
@@ -7,6 +12,26 @@ provider "azurerm" {
   tenant_id     = "${var.tenantid}"
   subscription_id = "${var.subscriptionid}"
 }
+
+
+
+######################
+RG
+######################
+
+resource"azurerm_resource_group" "rg"{
+  # Name/Location of the Resource Group in which the AKS cluster will be created.
+  name  = "${var.resource_group_name}"
+  location  = "${var.resource_group_location}"
+}
+
+
+
+
+######################
+AKS
+######################
+
 
 resource "azurerm_kubernetes_cluster" "spoke-aks" {
   name                = "spoke1-aks"
@@ -20,6 +45,7 @@ resource "azurerm_kubernetes_cluster" "spoke-aks" {
   orchestrator_version = var.kube_version
   node_count           = var.node_count 
   vm_size              = var.node_size
+  os_type              = "linux"
   os_disk_size_gb      = var.node_disk_size
   max_pods             = var.node_pod_count
   vnet_subnet_id       = azurerm_subnet.subnet_aks.id
@@ -35,8 +61,6 @@ resource "azurerm_kubernetes_cluster" "spoke-aks" {
     client_id = "${var.clientid}"
     client_secret = "${var.clientsecret}"
   }
-  
-  
   role_based_access_control {
     enabled = true
   }
