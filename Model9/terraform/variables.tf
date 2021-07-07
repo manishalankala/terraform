@@ -36,13 +36,17 @@ variable "resource_group_location" {
   default     = "eastus"
 }
 
+
+###############################################
+### AKS ###
+###############################################
+
+
+
 variable "cluster_name" {
   description = "This Contains the name of Azure Container Registry"
   default     = "akscluster"
 }
-
-
-
 
 variable "kube_version" {
   default = "1.19.10" 
