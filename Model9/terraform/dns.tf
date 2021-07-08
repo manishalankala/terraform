@@ -6,7 +6,9 @@ resource "azurerm_resource_group" "hub-rg" {
   location = "West Europe"
 }
 
-# Note: 
+
+######################################### Note ########################################
+
 # MX – specifies where the emails for your domain should be delivered.
 # TXT – used to store text-based information related to your domain. Most commonly used for storing SPF data.
 # SPF – a mail validation protocol used to prevent email spoofing.
