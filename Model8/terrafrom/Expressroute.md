@@ -40,3 +40,7 @@ To connect private peering needs 1. peer asn 2.Primary subnet /30
 Scondary subnet /30
 4.VLAN ID 
 5. Shared key 
+
+
+
+![image](https://user-images.githubusercontent.com/33985509/124996003-89da8a00-e048-11eb-832f-56d609ab0d93.png)
