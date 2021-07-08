@@ -26,12 +26,26 @@ azurerm_express_route_circuit_peering
 ~~~
 To connect private peering needs 
 1. peer asn 
-2. 2.Primary subnet /30 
+2. Primary subnet /30 
 3. Secondary subnet /30
-4.VLAN ID 
+4. VLAN ID 
 5. Shared key 
 ~~~
 
+
+In terraform we need
+
+~~~
+1. azurerm_virtual_wan
+2. azurerm_virtual_hub
+3. azurerm_express_route_gateway
+4. azurerm_express_route_port
+5. azurerm_express_route_circuit
+6. azurerm_express_route_circuit_peering
+7. azurerm_express_route_connection
+
+
+~~~
 
 
 
