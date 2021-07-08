@@ -43,4 +43,12 @@ Scondary subnet /30
 
 
 
+
+## ExpressRoute connectivity models
+
 ![image](https://user-images.githubusercontent.com/33985509/124996003-89da8a00-e048-11eb-832f-56d609ab0d93.png)
+
+## Peering ExpressRoute
+
+![image](https://user-images.githubusercontent.com/33985509/124996139-be4e4600-e048-11eb-90a0-dafc1e4d56cd.png)
+
