@@ -33,3 +33,10 @@ Once the service provider has provisioned we can see the connections under (expr
 
 9 location - our
 
+
+
+
+To connect private peering needs 1. peer asn 2.Primary subnet /30 
+Scondary subnet /30
+4.VLAN ID 
+5. Shared key 
