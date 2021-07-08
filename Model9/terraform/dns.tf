@@ -21,7 +21,7 @@ resource "azurerm_dns_a_record" "projectmydomain" {
   zone_name           = "${azurerm_dns_zone.mydomaincom.name}"
   resource_group_name = "${azurerm_resource_group.hub-rg.name}"
   ttl                 = 300
-  records             = ["127.0.0.1"]
+  records             = ["127.0.0.1"].    ### enter the public IP address for your web server
 }
 
 
