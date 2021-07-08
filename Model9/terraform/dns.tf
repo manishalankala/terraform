@@ -41,7 +41,15 @@ TXT – used to store text-based information related to your domain. Most common
 SPF – a mail validation protocol used to prevent email spoofing.
 AAAA – it maps a domain name to the IP address (IPv6) of the computer hosting the domain.
 SRV – stands for Service Record and it specifies on only an IP but also a port.
-    
   
+  
+  
+Verifying Azure DNS Zone Configuration 
 verify nslookup www.mydomaincom.com <name server name>
 example: nslookup www.mydomaincom.com ns1-08.azure-dns.com
+  
+  
+  
+A-record is the record contains the pairing between the IP address and the domain name. 
+  It can have more than one entries usually known as record sets. 
+  In record sets, the domain name remains constant, while the IP addresses are different.
