@@ -41,3 +41,7 @@ TXT – used to store text-based information related to your domain. Most common
 SPF – a mail validation protocol used to prevent email spoofing.
 AAAA – it maps a domain name to the IP address (IPv6) of the computer hosting the domain.
 SRV – stands for Service Record and it specifies on only an IP but also a port.
+    
+  
+verify nslookup www.mydomaincom.com <name server name>
+example: nslookup www.mydomaincom.com ns1-08.azure-dns.com
