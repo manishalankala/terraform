@@ -22,6 +22,33 @@ After Service provider provisions then
 
 
 
+connection type
+
+~~~
+connection type = express route
+subcription = 
+Resource group =
+Location = 
+~~~
+
+Settings
+
+~~~
+virtual network gateway = 
+Express route circuit = 
+connection name = 
+~~~
+
+
+
+
+
+
+
+
+
+
+
 azurerm_express_route_circuit_peering
 ~~~
 To connect private peering needs 
