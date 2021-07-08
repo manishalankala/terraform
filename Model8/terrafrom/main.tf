@@ -1,3 +1,14 @@
+
+
+
+
+
+
+
+
+
+
+
 # Create a Public IP for the Gateway
 
 resource "azurerm_public_ip" "public-gateway-ip" {
