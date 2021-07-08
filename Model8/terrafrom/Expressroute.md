@@ -1,7 +1,7 @@
 
 Steps :
 
-go to express route circuit to get the ~servicekey~
+go to express route circuit to get the __servicekey__
 
 copy the service and send to service provider for provisioning.
 
