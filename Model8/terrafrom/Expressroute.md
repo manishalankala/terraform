@@ -8,6 +8,27 @@ copy the service and send to service provider for provisioning.
 Once the service provider has provisioned we can see the connections under (express route circuit - connections)
 
 
+
+
+
+After Service provider provisions then
+
+![image](https://user-images.githubusercontent.com/33985509/124996733-bf33a780-e049-11eb-8d9e-812023afb5dc.png)
+
+![image](https://user-images.githubusercontent.com/33985509/124996900-0fab0500-e04a-11eb-9ed2-15ada54145eb.png)
+
+![image](https://user-images.githubusercontent.com/33985509/124996967-27828900-e04a-11eb-9482-4356bf3f0fcc.png)
+
+
+
+
+
+
+
+
+
+
+
 1.ExpressRoute Network Gateway
 
 2.Public IP address — associated with the ER gateway
