@@ -27,7 +27,7 @@ resource "azurerm_resource_group" "hub-rg" {
 
 resource "azurerm_dns_zone" "mydomaincom" {
   name                = "mydomain.com" # replace with your domain
-  resource_group_name = "${azurerm_resource_group.dns_management.name}"
+  resource_group_name = "${azurerm_resource_group.hub-rg.name}"
 }
 
 
@@ -37,8 +37,8 @@ resource "azurerm_dns_zone" "mydomaincom" {
 # In record sets, the domain name remains constant, while the IP addresses are different.
 ######################################################
 
-resource "azurerm_dns_a_record" "projectmydomain" {
-  name                = "project"
+resource "azurerm_dns_a_record" "public_mydomaincom" {
+  name                = "public-mydomaincom"
   zone_name           = "${azurerm_dns_zone.mydomaincom.name}"
   resource_group_name = "${azurerm_resource_group.hub-rg.name}"
   ttl                 = 300
@@ -49,17 +49,35 @@ resource "azurerm_dns_a_record" "projectmydomain" {
 ### CNAME – specifies redirects from your domain’s subdomains to other domains/subdomains ###
 #############################################
 
-resource "azurerm_dns_cname_record" "awesomemydomain" {
-  name                = "awesome"
+resource "azurerm_dns_cname_record" "mydomain_cnamerecord" {
+  name                = "mydomaincom-cname-record"
   zone_name           = "${azurerm_dns_zone.mydomaincom.name}"
-  resource_group_name = "${azurerm_resource_group.dns_management.name}"
+  resource_group_name = "${azurerm_resource_group.hub-rg.name}"
   ttl                 = 300
   record              = "dev.mydomain.com"
 }
 
 
+#############################################
+### if sub domains needed
+#############################################
+
+#resource "azurerm_dns_cname_record" "mydomain_cnamerecord" {
+#  name                = "mydomaincom-cname-record"
+#  zone_name           = "${azurerm_dns_zone.mydomaincom.name}"
+#  resource_group_name = "${azurerm_resource_group.hub-rg.name}"
+#  ttl                 = 300
+#  record              = "test.mydomain.com"
+#}
 
 
+#resource "azurerm_dns_cname_record" "mydomain_cnamerecord" {
+# name                = "mydomaincom-cname-record"
+#  zone_name           = "${azurerm_dns_zone.mydomaincom.name}"
+#  resource_group_name = "${azurerm_resource_group.hub-rg.name}"
+#  ttl                 = 300
+#  record              = "prod.mydomain.com"
+#}
   
 
 
