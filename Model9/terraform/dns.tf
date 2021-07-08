@@ -31,11 +31,11 @@ resource "azurerm_dns_zone" "mydomaincom" {
 }
 
 
-###### A ############################
+############### A #####################################
 # A-record is the record contains the pairing between the IP address and the domain name. 
 # It can have more than one entries usually known as record sets. 
 # In record sets, the domain name remains constant, while the IP addresses are different.
-####################################
+######################################################
 
 resource "azurerm_dns_a_record" "projectmydomain" {
   name                = "project"
@@ -45,9 +45,9 @@ resource "azurerm_dns_a_record" "projectmydomain" {
   records             = ["PUBLIC IP"].    ### enter the public IP address for your web server
 }
 
-####################################
+#############################################
 ### CNAME – specifies redirects from your domain’s subdomains to other domains/subdomains ###
-####################################
+#############################################
 
 resource "azurerm_dns_cname_record" "awesomemydomain" {
   name                = "awesome"
