@@ -22,6 +22,15 @@ After Service provider provisions then
 
 
 
+azurerm_express_route_circuit_peering
+~~~
+To connect private peering needs 
+1. peer asn 
+2. 2.Primary subnet /30 
+3. Secondary subnet /30
+4.VLAN ID 
+5. Shared key 
+~~~
 
 
 
@@ -58,12 +67,6 @@ After Service provider provisions then
 
 
 
-To connect private peering needs 1. peer asn 2.Primary subnet /30 
-Scondary subnet /30
-4.VLAN ID 
-5. Shared key 
-
-
 
 
 ## ExpressRoute connectivity models
@@ -74,3 +77,7 @@ Scondary subnet /30
 
 ![image](https://user-images.githubusercontent.com/33985509/124996139-be4e4600-e048-11eb-90a0-dafc1e4d56cd.png)
 
+
+## Azure Virtual WAN
+
+![image](https://user-images.githubusercontent.com/33985509/124997897-be9c1080-e04b-11eb-8734-f356b39c5f0d.png)
