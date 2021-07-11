@@ -14,7 +14,7 @@ Local Network Gateway — a logical representation of your on-premise VPN router
 VPN Connection — configures the link between the VPN Gateway and Local Network
 
 
-Requirements :
+## Requirements :
 
 1.VPN device = you need to have VPN device in on-premises to create the VPN connection with azure
   Link - https://docs.microsoft.com/en-us/azure/vpn-gateway/vpn-gateway-about-vpn-devices
@@ -23,6 +23,8 @@ Requirements :
 
 3.Azure Subscription =  you need active Azure subscription
 
+
+## Steps
 
 Step 1:  Create Virtual Network 
 
