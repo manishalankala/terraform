@@ -63,3 +63,13 @@ IP Address – Public IP address to represent your VPN device. It should not beh
 Address Space – This is yours on premises address ranges. You can add multiple ranges.
 Resource Group – you can create new resource group or use the same one you were using
 ~~~
+
+Step 5 : Create Site-to-Site VPN
+
+~~~
+Name – Name of the connection 
+Connection Type – Type of the VPN. Most of the time its site-to-site
+Virtual Network Gateway – you need to select the relevant virtual network gateway
+Local Network Gateway – in here need to select the relevant local network gateway for your connection
+Shared Key – This is the pre-shared key you going to use for the VPN configuration
+~~~
