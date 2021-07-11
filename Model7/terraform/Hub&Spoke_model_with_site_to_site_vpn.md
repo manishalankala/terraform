@@ -17,6 +17,7 @@ VPN Connection — configures the link between the VPN Gateway and Local Network
 ## Requirements :
 
 1.VPN device = you need to have VPN device in on-premises to create the VPN connection with azure
+
   Link - https://docs.microsoft.com/en-us/azure/vpn-gateway/vpn-gateway-about-vpn-devices
   
 2.Static Public IP address = your VPN device should have external public IP address and it shouldn’t be NAT.
