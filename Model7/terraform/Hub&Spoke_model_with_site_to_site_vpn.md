@@ -71,7 +71,7 @@ Step 5 : Create Site-to-Site VPN
 
 ~~~
 Name – Name of the connection 
-Connection Type – Type of the VPN. Most of the time its site-to-site
+Connection Type – Type of the VPN. Most of the time its site-to-site.      = [ 1. site-to-site(IPsec) 2. Express Route 3.point-to-site ]
 Virtual Network Gateway – you need to select the relevant virtual network gateway
 Local Network Gateway – in here need to select the relevant local network gateway for your connection
 Shared Key – This is the pre-shared key you going to use for the VPN configuration
