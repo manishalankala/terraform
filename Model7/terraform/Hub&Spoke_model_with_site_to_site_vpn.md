@@ -50,8 +50,8 @@ Step 3 : Create Virtual Network Gateway
 
 ~~~
 Name – Name for the virtual network gateway
-Gateway Type – For our VPN it will be VPN [ 1. VPN 2. Express Route ]
-VPN Type – Type of the VPN and regular VPN will be route-based [ 1. Route based 2. Policy based ]
+Gateway Type – For our VPN it will be VPN    = [ 1. VPN 2. Express Route ]
+VPN Type – Type of the VPN and regular VPN will be route-based   = [ 1. Route based 2. Policy based ]
 SKU – SKU for the VPN type
 Virtual Network – in here select the VNet you have created following previous step
 Public IP Address – VPN need to have public IP address. Select public IP from here or if you don’t have, once you click on the option it will allow you to add new one. 
