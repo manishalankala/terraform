@@ -12,7 +12,7 @@ variables:
   - name: backendAzureRmResourceGroupName
     value: rg-tf-dev
   - name: backendAzureRmStorageAccountName
-    value: stnbterraformdevuaen
+    value: stnbterraformtest
   - name: backendAzureRmContainerName
     value: terrastate
   - name: backendAzureRmKey
@@ -22,6 +22,6 @@ variables:
   - name: tfPlanartifacts
     value: "test.tfplan"
   - name: tfPlanfolder
-    value: dev
+    value: test
   - name: tfPlanpublish
     value: "test_core_plan"
