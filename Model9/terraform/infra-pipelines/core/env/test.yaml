@@ -1,27 +1,39 @@
 variables:
   - name: PROJECT_PATH
     value: azure-platform-core
+    
   - name: tfComponent
     value: infra
+    
   - name: tfExecutionDir
     value: '$(tfComponent)'
+    
   - name: terraformVersion
     value: 0.14.10
+    
   - name: serviceConnectionName
     value: 'test Service Connection'
+    
   - name: backendAzureRmResourceGroupName
     value: rg-tf-test
+    
   - name: backendAzureRmStorageAccountName
-    value: stnbterraformtest
+    value: stterraformtest
+    
   - name: backendAzureRmContainerName
     value: terrastate
+    
   - name: backendAzureRmKey
     value: 'state-core-test.tfstate'
+    
   - name: backendRgLoc
     value: westus
+    
   - name: tfPlanartifacts
     value: "test.tfplan"
+    
   - name: tfPlanfolder
     value: test
+    
   - name: tfPlanpublish
     value: "test_core_plan"
