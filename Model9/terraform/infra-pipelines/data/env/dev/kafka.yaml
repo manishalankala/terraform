@@ -3,7 +3,7 @@ variables:
     value: azure-platform-data
     
   - name: tfComponent
-    value: "infra/hadoophive"
+    value: "infra/kafka"
     
   - name: tfExecutionDir
     value: '$(tfComponent)'
