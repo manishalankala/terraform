@@ -1,1 +1,40 @@
+variables:
+  - name: PROJECT_PATH
+    value: azure-platform-data
+    
+  - name: tfComponent
+    value: "infra/spark"
+    
+  - name: tfExecutionDir
+    value: '$(tfComponent)'
+    
+  - name: terraformVersion
+    value: 0.14.10
+    
+  - name: serviceConnectionName
+    value: 'Dev Service Connection'
+    
+  - name: backendAzureRmResourceGroupName
+    value: rg-tf-dev
+    
+  - name: backendAzureRmStorageAccountName
+    value: stterraformdev
+    
+  - name: backendAzureRmContainerName
+    value: terrastate
+    
+  - name: backendAzureRmKey
+    value: 'state-shared-spark-dev.tfstate'
+    
+  - name: backendRgLoc
+    value: westus
+    
 
+  - name: tfPlanartifacts
+    value: "spark.tfplan"
+    
+  - name: tfPlanfolder
+    value: spark
+    
+  - name: tfPlanpublish
+    value: "spark_dev_plan"
