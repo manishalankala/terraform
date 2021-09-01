@@ -1,1 +1,39 @@
-
+variables:
+  - name: PROJECT_PATH
+    value: azure-platform-core
+    
+  - name: tfComponent
+    value: infra
+    
+  - name: tfExecutionDir
+    value: '$(tfComponent)'
+    
+  - name: terraformVersion
+    value: 0.14.10
+    
+  - name: serviceConnectionName
+    value: 'prod Service Connection'
+    
+  - name: backendAzureRmResourceGroupName
+    value: rg-tf-prod
+    
+  - name: backendAzureRmStorageAccountName
+    value: stterraformprod
+    
+  - name: backendAzureRmContainerName
+    value: terrastate
+    
+  - name: backendAzureRmKey
+    value: 'state-core-prod.tfstate'
+    
+  - name: backendRgLoc
+    value: westus
+    
+  - name: tfPlanartifacts
+    value: "prod.tfplan"
+    
+  - name: tfPlanfolder
+    value: prod
+    
+  - name: tfPlanpublish
+    value: "prod_core_plan"
