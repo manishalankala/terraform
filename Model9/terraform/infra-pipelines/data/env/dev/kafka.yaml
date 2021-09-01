@@ -24,7 +24,7 @@ variables:
     value: terrastate
     
   - name: backendAzureRmKey
-    value: 'state-shared-hadoophive-dev.tfstate'
+    value: 'state-shared-kafka-dev.tfstate'
     
   - name: backendRgLoc
     value: westus
