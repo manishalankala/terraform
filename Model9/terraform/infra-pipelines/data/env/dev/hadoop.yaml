@@ -1,1 +1,40 @@
+variables:
+  - name: PROJECT_PATH
+    value: azure-platform-data
+    
+  - name: tfComponent
+    value: "infra/hadoophive"
+    
+  - name: tfExecutionDir
+    value: '$(tfComponent)'
+    
+  - name: terraformVersion
+    value: 0.14.10
+    
+  - name: serviceConnectionName
+    value: 'Dev Service Connection'
+    
+  - name: backendAzureRmResourceGroupName
+    value: rg-tf-dev
+    
+  - name: backendAzureRmStorageAccountName
+    value: stterraformdev
+    
+  - name: backendAzureRmContainerName
+    value: terrastate
+    
+  - name: backendAzureRmKey
+    value: 'state-shared-hadoophive-dev.tfstate'
+    
+  - name: backendRgLoc
+    value: westus
+    
 
+  - name: tfPlanartifacts
+    value: "hadoop.tfplan"
+    
+  - name: tfPlanfolder
+    value: hadoop
+    
+  - name: tfPlanpublish
+    value: "hadoop_dev_plan"
