@@ -1,0 +1,8 @@
+steps:
+    - task: ManualValidation@0
+      timeoutInMinutes: 120 # task times out in 2 hrs
+      inputs:
+        notifyUsers: |
+          manishalankala@gmail.com
+        instructions: 'Please review the plan'
+        onTimeout: 'reject'
