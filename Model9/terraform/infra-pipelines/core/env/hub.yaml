@@ -1,1 +1,39 @@
-
+variables:
+  - name: PROJECT_PATH
+    value: azure-platform-core
+    
+  - name: tfComponent
+    value: infra
+    
+  - name: tfExecutionDir
+    value: '$(tfComponent)'
+    
+  - name: terraformVersion
+    value: 0.14.10
+    
+  - name: serviceConnectionName
+    value: 'Hub Service Connection'
+    
+  - name: backendAzureRmResourceGroupName
+    value: rg-tf-hub
+    
+  - name: backendAzureRmStorageAccountName
+    value: stterraformhub
+    
+  - name: backendAzureRmContainerName
+    value: terrastate
+    
+  - name: backendAzureRmKey
+    value: 'state-core-hub.tfstate'
+    
+  - name: backendRgLoc
+    value: westus
+    
+  - name: tfPlanartifacts
+    value: "hub.tfplan"
+    
+  - name: tfPlanfolder
+    value: hub
+    
+  - name: tfPlanpublish
+    value: "hub_core_plan"
