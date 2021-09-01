@@ -10,7 +10,7 @@ variables:
   - name: serviceConnectionName
     value: 'test Service Connection'
   - name: backendAzureRmResourceGroupName
-    value: rg-tf-dev
+    value: rg-tf-test
   - name: backendAzureRmStorageAccountName
     value: stnbterraformtest
   - name: backendAzureRmContainerName
