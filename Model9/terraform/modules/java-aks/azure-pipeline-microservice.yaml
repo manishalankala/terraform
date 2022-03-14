@@ -1,0 +1,261 @@
+parameters:
+  - name: serviceName
+    type: string
+  - name: rootFolder
+    type: string
+  - name: runAcceptanceTests
+    type: boolean
+    default: true
+  - name: triggerCommitBasedBuilds
+    type: boolean
+    default: true
+
+stages:
+- stage: Service_${{ replace(parameters['serviceName'], '-', '_') }}
+  displayName: ${{ replace(parameters['serviceName'], '-', '_') }}
+  variables:
+    - template: ../configs/common-pipelinevariables.yaml
+    - template: ../configs/dev-pipelinevariables.yaml
+  dependsOn: []
+  pool:
+    vmImage: ubuntu-latest
+#  pool: ${{ variables.agentPool }}
+  jobs:
+    - template: ../../pipeline-modules/selective-build-trigger.yaml
+      parameters:
+        serviceName: '${{ parameters.serviceName }}'
+        triggerCommitBasedBuilds: '${{ parameters.triggerCommitBasedBuilds }}'
+        archetypesDir: '${{ variables.archetypesDir }}'
+        serviceCodeDir: '${{ variables.serviceCodeDir }}'
+
+- stage: MavenBuild_SonarScan_${{ replace(parameters['serviceName'], '-', '_') }}
+  displayName: Maven Build & Sonar Scan
+  dependsOn:
+    - Service_${{ replace(parameters['serviceName'], '-', '_') }}
+  variables:
+    - template: ../configs/common-pipelinevariables.yaml
+    - template: ../configs/dev-pipelinevariables.yaml
+    - name: myBuildQueue
+      value: $[ dependencies.Service_${{ replace(parameters['serviceName'], '-', '_') }}.outputs['SelectiveBuildTrigger.setBuildQueue.buildQueue'] ]
+  condition: |
+    and
+    (
+      succeeded(), 
+      or(eq('${{ parameters.triggerCommitBasedBuilds }}', false), contains(variables.myBuildQueue, '${{ parameters.serviceName }}'))
+    )
+  pool: ${{ variables.agentPool }}
+  jobs:
+  - template: ../../pipeline-modules/maven-build.yaml
+    parameters:
+        serviceName: '${{ parameters.serviceName }}'
+        rootFolder: '${{ parameters.rootFolder }}'
+        helmDirectory: '${{ variables.helmDirectory }}'
+        archetypesDir: '${{ variables.archetypesDir }}'
+        serviceCodeDir: '${{ variables.serviceCodeDir }}'
+        dockerDirectory: '${{ variables.dockerDirectory }}'
+        azureSubscription: '${{ variables.azureSubscription }}'
+        keyvaultname: '${{ variables.spokeSharedKeyvaultName }}'
+        cosmosConnectionString: '${{ variables.cosmosConnectionString }}'
+        environment: '${{ variables.environmentName }}'
+        sonarCloudProjectName: ${{ variables.sonarCloudProjectName }}
+        sonarOrganizationName: ${{ variables.sonarOrganizationName }}
+
+# - stage: VeracodeScan_${{ replace(parameters['serviceName'], '-', '_') }}
+#   displayName: Veracode Scan
+#   dependsOn: MavenBuild_SonarScan_${{ replace(parameters['serviceName'], '-', '_') }}
+#   variables:
+#     - template: ../configs/common-pipelinevariables.yaml
+#     - template: ../configs/dev-pipelinevariables.yaml
+#     - name: veracodeTemplate
+#       value: ../../pipeline-modules/veracode-pipeline-scan.yaml
+#   pool: ${{ variables.agentPool }}
+#   jobs:
+#   - template: ${{variables.veracodeTemplate}}
+#     parameters:
+#       serviceName: "${{ parameters.serviceName }}"
+#       rootFolder: "${{ parameters.rootFolder }}"
+#       azureSubscription: ${{ variables.azureSubscription }}
+#       keyvaultname: ${{ variables.spokeSharedKeyvaultName }}
+
+- stage: DockerImageBuild_${{ replace(parameters['serviceName'], '-', '_') }}
+  condition: and(succeeded(), eq(variables['isDeploymentBranch'], 'true'))
+  displayName: Docker Image Build and Push to ACR
+  variables:
+    - template: ../configs/common-pipelinevariables.yaml
+    - template: ../configs/dev-pipelinevariables.yaml
+  dependsOn: MavenBuild_SonarScan_${{ replace(parameters['serviceName'], '-', '_') }}
+  pool: ${{ variables.agentPool }}
+  jobs:
+  - template: ../../pipeline-modules/docker-build-push.yaml
+    parameters:
+      containerRegistryConnection: ${{ variables.containerRegistryConnection }}
+      serviceName: '${{ parameters.serviceName }}'
+      archetypesDir: ${{ variables.archetypesDir }}
+      dockerDirectory: ${{ variables.dockerDirectory }}
+
+- stage: HelmLint_${{ replace(parameters['serviceName'], '-', '_') }}
+  condition: and(succeeded(), eq(variables['isDeploymentBranch'], 'true'))
+  displayName: Helm chart Lint and Push to ACR
+  variables:
+    - template: ../configs/common-pipelinevariables.yaml
+    - template: ../configs/dev-pipelinevariables.yaml
+  dependsOn: MavenBuild_SonarScan_${{ replace(parameters['serviceName'], '-', '_') }}
+  pool: ${{ variables.agentPool }}
+  jobs:
+  - template: ../../pipeline-modules/helm-lint-push.yaml
+    parameters:
+      azureSubscription: ${{ variables.azureSubscription }}
+      azureHubSubscription: ${{ variables.azureHubSubscription }}
+      keyvaultname: ${{ variables.spokeSharedKeyvaultName }}
+      kubernetesServiceConnection: ${{variables.kubernetesServiceConnection}}
+      azureContainerRegistry: ${{ variables.azureContainerRegistry }}
+      serviceName: '${{ parameters.serviceName }}'
+
+- stage: HelmDeploy_${{ replace(parameters['serviceName'], '-', '_') }}_Dev
+  condition: and(succeeded(), eq(variables['isDeploymentBranch'], 'true'))
+  displayName: Deploy to AKS Dev
+  variables:
+    - template: ../configs/common-pipelinevariables.yaml
+    - template: ../configs/dev-pipelinevariables.yaml
+    - ${{ if and(eq(variables['featureBranchDeployEnabled'], 'true'), eq(variables['isDeploymentBranch'], 'false')) }}:
+      - name: aksNamespace
+        value: "devsnbx"
+    - name: releaseName
+      value: '$(Build.Repository.Name)-${{ parameters.serviceName }}'
+    - ${{ if eq(variables['aksNamespace'], 'devsnbx') }}:
+      - name: releaseName
+        value: '$(Build.Repository.Name)-${{ variables.aksNamespace }}-${{ parameters.serviceName }}'
+  dependsOn:
+  - HelmLint_${{ replace(parameters['serviceName'], '-', '_') }}
+  - DockerImageBuild_${{ replace(parameters['serviceName'], '-', '_') }}
+  pool: ${{ variables.agentPool }}
+  jobs:
+  - template: ../../pipeline-modules/aks-deploy.yaml
+    parameters:
+      environment: ${{ variables.environmentName }}
+      kubernetesServiceConnection: ${{variables.kubernetesServiceConnection}}
+      serviceName: ${{ parameters.serviceName }}
+      rootFolder: ${{ parameters.rootFolder }}
+      nameSpace: ${{ variables.aksNamespace }}
+      azureSubscription: ${{ variables.azureSubscription }}
+      comosKeyvaultname: ${{ variables.spokeCosmosKeyvaultName }}
+      sharedKeyvaultName: ${{ variables.spokeSharedKeyvaultName }}
+      azureContainerRegistry: ${{ variables.azureContainerRegistry }}
+      containerRegistryConnection: ${{ variables.containerRegistryConnection }}
+      releaseName: ${{ variables.releaseName }}
+
+- stage: Teams_Notification_${{ replace(parameters['serviceName'], '-', '_') }}_DEV
+  displayName: Teams Notification for build deployment on Dev env
+  condition: and(succeeded(), eq(variables['isDeploymentBranch'], 'true'))
+  dependsOn:
+    - HelmDeploy_${{ replace(parameters['serviceName'], '-', '_') }}_Dev
+  variables:
+    - template: ../configs/common-pipelinevariables.yaml
+    - template: ../configs/dev-pipelinevariables.yaml
+  pool: ${{ variables.agentpool }}
+  jobs:
+  - template: ../../pipeline-modules/build-notification.yaml
+    parameters:
+      serviceName: '${{ parameters.serviceName }}'
+      rootFolder: '${{ parameters.rootFolder }}'
+      notificationMessage: "${{ replace(parameters['serviceName'], '-', '_') }} has been deployed into Dev environment"
+
+# - stage: AcceptanceTest_${{ replace(parameters['serviceName'], '-', '_') }}
+#   condition: and(succeeded(), eq(variables['isDeploymentBranch'], 'true'))
+#   displayName: Acceptance Tests
+#   variables:
+#     - template: ../configs/dev-pipelinevariables.yaml
+#   dependsOn:
+#     - HelmDeploy_${{ replace(parameters['serviceName'], '-', '_') }}_Dev
+#   pool: ${{ variables.agentPool }}
+#   jobs:
+#   - template: ../../pipeline-modules/acceptance-test.yaml
+#     parameters:
+#       serviceName: '${{ parameters.serviceName }}'
+#       rootFolder: '${{ parameters.rootFolder }}'
+#       environment: '${{ variables.environmentName }}'
+#       isEnabled: '${{ parameters.runAcceptanceTests }}'
+
+- stage: ManualValidation_${{ replace(parameters['serviceName'], '-', '_') }}
+  condition: and(succeeded(), eq(variables['isDeploymentBranch'], 'true'))
+  displayName: Approve deployment to Test Env
+  pool: server
+  dependsOn:
+    - HelmDeploy_${{ replace(parameters['serviceName'], '-', '_') }}_Dev
+  variables:
+    - template: ../configs/common-pipelinevariables.yaml
+  jobs:
+  - template: ../../pipeline-modules/manual-validation.yaml
+  
+
+- stage: Teams_Notification_${{ replace(parameters['serviceName'], '-', '_') }}_ManualApproval
+  displayName: Teams Notification for build deployment approval for Test env
+  condition: and(succeeded(), eq(variables['isDeploymentBranch'], 'true'))
+  dependsOn:
+    - ManualValidation_${{ replace(parameters['serviceName'], '-', '_') }}
+  variables:
+    - template: ../configs/common-pipelinevariables.yaml
+    - template: ../configs/dev-pipelinevariables.yaml
+  pool: ${{ variables.agentpool }}
+  jobs:
+  - template: ../../pipeline-modules/build-notification.yaml
+    parameters:
+      notificationMessage: "Approved ${{ replace(parameters['serviceName'], '-', '_') }} to be deployed into Test environment"
+      serviceName: "${{ parameters.serviceName }}"
+      rootFolder: "${{ parameters.rootFolder }}"
+
+- stage: HelmDeploy_${{ replace(parameters['serviceName'], '-', '_') }}_Test
+  condition: and(succeeded(), eq(variables['isDeploymentBranch'], 'true'))
+  displayName: Deploy to AKS Test
+  variables:
+    - template: ../configs/common-pipelinevariables.yaml
+    - template: ../configs/test-pipelinevariables.yaml
+    - name: releaseName
+      value: '$(Build.Repository.Name)-${{ parameters.serviceName }}'
+  dependsOn:
+    - ManualValidation_${{ replace(parameters['serviceName'], '-', '_') }}
+  pool: ${{ variables.agentPool }}
+  jobs:
+  - template: ../../pipeline-modules/aks-deploy.yaml
+    parameters:
+      environment: '${{ variables.environmentName }}'
+      kubernetesServiceConnection: ${{variables.kubernetesServiceConnection}}
+      serviceName: '${{ parameters.serviceName }}'
+      rootFolder: '${{ parameters.rootFolder }}'
+      nameSpace: ${{ variables.aksNamespace }}
+      azureSubscription: ${{ variables.azureSubscription }}
+      comosKeyvaultname: ${{ variables.spokeCosmosKeyvaultName }}
+      sharedKeyvaultName: ${{ variables.spokeSharedKeyvaultName }}
+      azureContainerRegistry: ${{ variables.azureContainerRegistry }}
+      containerRegistryConnection: ${{ variables.containerRegistryConnection }}
+      releaseName: ${{ variables.releaseName }}
+
+- stage: Teams_Notification_${{ replace(parameters['serviceName'], '-', '_') }}_TestEnvDeploy
+  displayName: Teams Notification for build deployment approval for Test env
+  condition: and(succeeded(), eq(variables['isDeploymentBranch'], 'true'))
+  dependsOn:
+    - HelmDeploy_${{ replace(parameters['serviceName'], '-', '_') }}_Test
+  variables:
+    - template: ../configs/common-pipelinevariables.yaml
+    - template: ../configs/test-pipelinevariables.yaml
+  pool: ${{ variables.agentpool }}
+  jobs:
+  - template: ../../pipeline-modules/build-notification.yaml
+    parameters:
+      notificationMessage: "${{ replace(parameters['serviceName'], '-', '_') }} has been deployed into Test environment"
+      serviceName: '${{ parameters.serviceName }}'
+      rootFolder: '${{ parameters.rootFolder }}'
+
+- stage: Cleanup_${{ replace(parameters['serviceName'], '-', '_') }}
+  displayName: Cleanup
+  condition: always()
+  dependsOn:
+    - HelmDeploy_${{ replace(parameters['serviceName'], '-', '_') }}_Test
+  variables:
+    - template: ../configs/dev-pipelinevariables.yaml
+  pool: ${{ variables.agentPool }}
+  jobs:
+  - template: ../../pipeline-modules/clean-dir.yaml
+    parameters:
+      serviceName: '${{ parameters.serviceName }}'
+      azureContainerRegistry: ${{ variables.azureContainerRegistry }}
