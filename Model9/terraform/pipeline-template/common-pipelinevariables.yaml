@@ -1,1 +1,33 @@
 
+variables:
+  - name: azureHubSubscription
+    value: 'NeoBank Hub Service Connection'
+  - name: dockerDirectory
+    value: 'modules/docker'
+  - name: helmDirectory
+    value: 'modules/helmchart/java-microservice'
+  - name: archetypesDir
+    value: 'archetypesCode'
+  - name: serviceCodeDir
+    value: 'serviceCode'
+  - name: azureContainerRegistry
+    value: acr-hub001.azurecr.io
+  - name: artifactFeed
+    value: '33229fc-6ceb-4e50-9e8a-df743e06543747/1e12mon5-b589-43f5-8fd4-7f93eu8b0udf'
+  - name: artifactView
+    value: 'de6f15c1-4ag5-3991-b0b2-1cd1c9680d03'
+  - name: sonarCloudProjectName
+    value: 'sonarcloud'
+  - name: sonarOrganizationName
+    value: 'myapp'
+  - name: featureBranchDeployEnabled
+    value: 'false'
+  - name: isDeploymentBranch
+    value: 'false'
+  - ${{ if or(in(variables['Build.SourceBranchName'], 'master', 'main', 'release'), eq(variables['Build.Reason'], 'PullRequest'), startsWith(variables['Build.SourceBranch'], 'refs/pull/')) }}:
+    - name: isDeploymentBranch
+      value: 'true'
+  - name: backendAzureRmResourceGroupLocation
+    value: westeurope
+  - name: backendAzureRmContainerName
+    value: terrastate
