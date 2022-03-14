@@ -1,1 +1,43 @@
-
+variables:
+  - name: azureSubscription
+    value: 'Test Service Connection'
+  - name: kubernetesServiceConnection
+    value: "Private NEW AKS Test Service Connection"
+  - name: containerRegistryConnection
+    value: "Hub ACR Service Connection"
+  - name: agentPool
+    value: "devopspool-java11"
+  - name: environmentName
+    value: "test"
+  - name: aksNamespace
+    value: "test"
+  - name: agentPoolspark
+    value: "devopspool-java8"
+  - name: storageName
+    value: stn-test-01
+  - name: containerName
+    value: hdisparkstgfilesystem
+  - name: sparkClusterInternalName
+    value: spark-int-test-001
+  - name: spokeSharedKeyvaultName
+    value: spoke-sdkv-001
+  - name: spokeAppsKeyvaultName
+    value: spoke-appstest-001
+  - name: spokeDataKeyvaultName
+    value: datakv-003
+  - name: spokeCosmosKeyvaultName
+    value: spoke-coskv-001
+  - name: cosmosConnectionString
+    value: cosmos-connection-string
+  - name: azureContainerRegistry
+    value: acr-hub-001.azurecr.io
+  - name: azuresparkSSHconnection
+    value: 'Spark test SSH Service Connection'
+  - name: azureHiveSSHconnection
+    value: 'Hive test SSH Service Connection'
+  - name: azureKafkaSSHconnection
+    value: 'kafka test SSH Service Connection'
+  - name: backendAzureRmResourceGroupName
+    value: 'rg-tf-test'
+  - name: backendAzureRmStorageAccountName
+    value: stnba-test
