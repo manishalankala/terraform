@@ -1,0 +1,66 @@
+# runtime params to e overriden by consumers
+parameters:
+- name: runAcceptanceTests
+  type: boolean
+  default: false
+- name: triggerCommitBasedBuilds
+  type: boolean
+  default: true
+- name: adoEnvs
+  type: object
+  default: [dev, test]
+- name: appSettings
+  type: object
+  default: []
+
+# global variables available to all stages
+variables:
+- template: ../configs/common-pipelinevariables.yaml
+
+# pipelines stages
+stages:
+# stage template: perform pre-requisites[identify change set analysis on monorepo]
+- template: ./templates/stages/stage-prereq.yml
+  parameters:
+    stageName: ChangeSetAnalysis
+    triggerCommitBasedBuilds: '${{ parameters.triggerCommitBasedBuilds }}'
+    appSettings: ${{ parameters.appSettings }}
+
+# expression: loop as per the applicable rootDir --> service
+- ${{ each rootDir in parameters.appSettings.rootDirs }}:
+  - ${{ each service in rootDir.services }}:
+    # stage template: perform conditional service-build with quality scan
+    - template: ./templates/stages/stage-build-quality.yml
+      parameters:
+        serviceName: ${{ service.name }}
+        rootFolder: ${{ rootDir.name }}
+        triggerCommitBasedBuilds: '${{ parameters.triggerCommitBasedBuilds }}'
+
+# expression: loop as per the applicable environments --> rootDir --> service
+- ${{ each adoEnvName in parameters.adoEnvs }}:
+  - ${{ each rootDir in parameters.appSettings.rootDirs }}:
+    - ${{ each service in rootDir.services }}:
+      # stage template: perform conditional service-deployment
+      - template: ./templates/stages/stage-deploy.yml
+        parameters:
+          serviceName: ${{ service.name }}
+          rootFolder: ${{ rootDir.name }}
+          adoEnvName: ${{ adoEnvName }}
+
+      # stage template: perform conditional service-acceptance-test
+      - template: ./templates/stages/stage-acceptance-test.yml
+        parameters:
+          serviceName: ${{ service.name }}
+          rootFolder: ${{ rootDir.name }}
+          adoEnvName: ${{ adoEnvName }}
+          runAcceptanceTests: ${{ parameters.runAcceptanceTests }}
+
+# expression: loop as per the applicable rootDir --> service
+- ${{ each rootDir in parameters.appSettings.rootDirs }}:
+  - ${{ each service in rootDir.services }}:
+    # stage template: perform cleanup at the end
+    - template: ./templates/stages/stage-cleanup.yml
+      parameters:
+        serviceName: ${{ service.name }}
+        rootFolder: ${{ rootDir.name }}
+        dependsOn: Test_${{ replace(service.name, '-', '_') }}_test
