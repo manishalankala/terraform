@@ -82,7 +82,7 @@ stages:
       inputs:
         command: 'plan'
         workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/stacks'
-        environmentServiceName: 'NeoBank Dev Service Connection'
+        environmentServiceName: 'Dev Service Connection'
         commandOptions: '-var-file="../../sub-dev/dev.tfvars"'
         allowTelemetryCollection: true
 
