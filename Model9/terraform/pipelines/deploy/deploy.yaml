@@ -1,0 +1,184 @@
+trigger:
+- none
+
+variables:
+  isMaster: $[eq(variables['Build.SourceBranch'], 'refs/heads/master')]
+
+pool:
+  vmImage: ubuntu-latest
+
+
+
+############ Stage Hub #############
+
+stages:
+- stage: hub
+  jobs:
+  - job: hub_plan_apply
+    steps:
+    - task: TerraformCLI@0
+      inputs:
+        command: 'init'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/stacks'
+        backendType: 'azurerm'
+        backendServiceArm: 'Hub Service Connection'
+        backendAzureRmResourceGroupName: 'rg-tf-hub'
+        backendAzureRmStorageAccountName: 'stn-tf-hub'
+        backendAzureRmContainerName: 'hub-subscription'
+        backendAzureRmKey: 'state-tf-hub.tfstate'
+        allowTelemetryCollection: true
+
+    - task: TerraformCLI@0
+      inputs:
+        command: 'validate'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/stacks'
+        allowTelemetryCollection: true
+
+    - task: TerraformCLI@0
+      inputs:
+        command: 'plan'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/stacks'
+        environmentServiceName: 'Hub Service Connection'
+        commandOptions: '-var-file="../../sub-hub/hub.tfvars"'
+        allowTelemetryCollection: true
+
+    - task: TerraformCLI@0
+      condition: and(succeeded(), eq(variables.isMaster, true))
+      inputs:
+        command: 'apply'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/stacks'
+        environmentServiceName: 'Hub Service Connection'
+        commandOptions: '-var-file="../../sub-hub/hub.tfvars"'
+        allowTelemetryCollection: true
+
+
+
+
+############ Stage Dev #############
+
+- stage: dev
+  jobs:
+  - job: dev_plan_apply
+    steps:
+    - task: TerraformCLI@0
+      inputs:
+        command: 'init'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/stacks'
+        backendType: 'azurerm'
+        backendServiceArm: 'Dev Service Connection'
+        backendAzureRmResourceGroupName: 'rg-tf-dev'
+        backendAzureRmStorageAccountName: 'stn-tf-hub'
+        backendAzureRmContainerName: 'dev-subscription'
+        backendAzureRmKey: 'state-tf-dev.tfstate'
+        allowTelemetryCollection: true
+
+    - task: TerraformCLI@0
+      inputs:
+        command: 'validate'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/stacks'
+        allowTelemetryCollection: true
+
+    - task: TerraformCLI@0
+      inputs:
+        command: 'plan'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/stacks'
+        environmentServiceName: 'NeoBank Dev Service Connection'
+        commandOptions: '-var-file="../../sub-dev/dev.tfvars"'
+        allowTelemetryCollection: true
+
+    - task: TerraformCLI@0
+      condition: and(succeeded(), eq(variables.isMaster, true))
+      inputs:
+        command: 'apply'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/stacks'
+        environmentServiceName: 'Dev Service Connection'
+        commandOptions: '-var-file="../../sub-dev/dev.tfvars"'
+        allowTelemetryCollection: true
+
+
+
+
+############ Stage Test #############
+
+- stage: test
+  jobs:
+  - job: test_plan_apply
+    steps:
+    - task: TerraformCLI@0
+      inputs:
+        command: 'init'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/stacks'
+        backendType: 'azurerm'
+        backendServiceArm: 'test Service Connection'
+        backendAzureRmResourceGroupName: 'rg-tf-test'
+        backendAzureRmStorageAccountName: 'stn-tf-test'
+        backendAzureRmContainerName: 'test-subscription'
+        backendAzureRmKey: 'state-tf-test.tfstate'
+        allowTelemetryCollection: true
+
+    - task: TerraformCLI@0
+      inputs:
+        command: 'validate'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/stacks'
+        allowTelemetryCollection: true
+
+    - task: TerraformCLI@0
+      inputs:
+        command: 'plan'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/stacks'
+        environmentServiceName: 'Test Service Connection'
+        commandOptions: '-var-file="../../sub-qa/test.tfvars"'
+        allowTelemetryCollection: true
+
+    - task: TerraformCLI@0
+      condition: and(succeeded(), eq(variables.isMaster, true))
+      inputs:
+        command: 'apply'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/stacks'
+        environmentServiceName: 'Test Service Connection'
+        commandOptions: '-var-file="../../sub-qa/test.tfvars"'
+        allowTelemetryCollection: true
+
+
+
+
+############ Stage Sandbox #############
+
+- stage: sandbox
+  jobs:
+  - job: sandbox_plan_apply
+    steps:
+    - task: TerraformCLI@0
+      inputs:
+        command: 'init'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/stacks'
+        backendType: 'azurerm'
+        backendServiceArm: 'sandbox Service Connection'
+        backendAzureRmResourceGroupName: 'rg-tf-sandbox'
+        backendAzureRmStorageAccountName: 'stn-tf-sandbox'
+        backendAzureRmContainerName: 'sandbox-subscription'
+        backendAzureRmKey: 'state-tf-sandbox.tfstate'
+        allowTelemetryCollection: true
+
+    - task: TerraformCLI@0
+      inputs:
+        command: 'validate'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/stacks'
+        allowTelemetryCollection: true
+
+    - task: TerraformCLI@0
+      inputs:
+        command: 'plan'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/stacks'
+        environmentServiceName: 'Sandbox Service Connection'
+        commandOptions: '-var-file="../../sub-sa/sandbox.tfvars"'
+        allowTelemetryCollection: true
+
+    - task: TerraformCLI@0
+      condition: and(succeeded(), eq(variables.isMaster, true))
+      inputs:
+        command: 'apply'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/stacks'
+        environmentServiceName: 'Sandbox Service Connection'
+        commandOptions: '-var-file="../../sub-sa/sandbox.tfvars"'
+        allowTelemetryCollection: true
