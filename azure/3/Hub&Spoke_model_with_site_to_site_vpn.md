@@ -76,4 +76,6 @@ Shared Key – This is the pre-shared key you going to use for the VPN configura
 ~~~
 
 
+## s2s
+
 ![image](https://user-images.githubusercontent.com/33985509/159328819-7ae5b360-019e-47bb-89bd-4daddd0f1483.png)
