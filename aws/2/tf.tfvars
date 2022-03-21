@@ -1,0 +1,8 @@
+aws_access_key_id=""
+aws_secret_access_key=""
+vpc_region="us-east-1"
+vpc_name="anup"
+vpc_cidr_block="10.0.0.0/26"
+vpc_public_subnet_1_cidr="10.0.0.0/27"
+#vpc_access_from_ip_range="${vpc_access_from_ip_range}"
+vpc_private_subnet_1_cidr="10.0.0.32/27"
