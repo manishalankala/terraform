@@ -122,3 +122,8 @@ In terraform we need
 ## Azure Virtual WAN
 
 ![image](https://user-images.githubusercontent.com/33985509/124997897-be9c1080-e04b-11eb-8734-f356b39c5f0d.png)
+
+
+## ER
+
+![image](https://user-images.githubusercontent.com/33985509/159331719-853d855a-8646-45de-bf26-eaed3b1b01b7.png)
