@@ -6,3 +6,13 @@ resource "azurerm_resource_group" "devrg" {
         environment = "DEV"
     }
 }
+
+
+
+output "id" {
+  value = "${azurerm_resource_group.devrg.id}"
+}
+
+output "name" {
+  value = "${azurerm_resource_group.devrg.name}"
+}
