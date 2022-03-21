@@ -74,3 +74,6 @@ Virtual Network Gateway – you need to select the relevant virtual network gate
 Local Network Gateway – in here need to select the relevant local network gateway for your connection
 Shared Key – This is the pre-shared key you going to use for the VPN configuration
 ~~~
+
+
+![image](https://user-images.githubusercontent.com/33985509/159328819-7ae5b360-019e-47bb-89bd-4daddd0f1483.png)
