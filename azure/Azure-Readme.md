@@ -96,14 +96,9 @@ Integrate seamless package handling into your CI/CD pipeline
 Easily access all your artifacts in builds and releases-Artifacts integrates natively with
 
 Steps:
-- Icreation of a package feed
-1.Create a team feed
-2.Connect to the feed in Azure DevOps
+- Icreation of a package feed : 1.Create a team feed 2.Connect to the feed in Azure DevOps
 
-- Build Integration
-1.Pack and Push packages to your feed
-2.Setting up Visual studio to consume the feed
+- Build Integration : 1.Pack and Push packages to your feed 2.Setting up Visual studio to consume the feed
 
-- Consume from a feed
-1.Running build and restoring packages from team feed
-2.Setting up new solution locally to consume feed
+- Consume from a feed : 1.Running build and restoring packages from team feed 2.Setting up new solution locally to consume feed
+
