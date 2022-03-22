@@ -71,3 +71,23 @@ as Infrastructure grows and you need to define multiple environments, you might 
 3.DEFINING OUTPUTS		
 
 Outputs show the information needed after Terraform templates are deployed. They are also used within modules to export information.
+
+
+
+Azure Artifacts :
+```
+Azure Artifacts is a package management solution
+Azure Artifacts enables developers to share and consume packages from different feeds and
+Packages can be shared within the same team, the same organization, and even publicly
+Through Azure Devops integration we can create and share Maven, NPM, NuGet Packages 
+
+
+Benefits:
+Keep your artifacts organised:
+Share code effortlessly by storing Maven, npm, NuGet and Python packages together.
+Protect your packages:
+Keep every public source package you use-including packages from npmjs and nuget.org-safe
+Integrate seamless package handling into your CI/CD pipeline
+Easily access all your artifacts in builds and releases-Artifacts integrates native
+
+```
