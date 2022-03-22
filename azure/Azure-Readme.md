@@ -110,3 +110,5 @@ Steps:
 
 ```$(build.artifactstagingdirectory) : The local path on the agent where any artifacts are copied ``` 
 
+```$(Pipeline.Workspace) : The local path on the agent where all folders for a given build pipeline are created.```
+
