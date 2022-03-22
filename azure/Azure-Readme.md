@@ -74,6 +74,8 @@ Outputs show the information needed after Terraform templates are deployed. They
 
 
 
+PAC : Pipeline as Code
+
 Azure Artifacts :
 ```
 Azure Artifacts is a package management solution
@@ -102,3 +104,11 @@ Steps:
 
 - Consume from a feed : 1.Running build and restoring packages from team feed 2.Setting up new solution locally to consume feed
 
+
+
+$ (system.defaultworkingdirectory)'
+The local path on the agent where your source code
+
+
+'$ (build.artifactstagingdirectory)'
+The local path on the agent where any artifacts are copied
