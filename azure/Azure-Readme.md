@@ -74,7 +74,7 @@ Outputs show the information needed after Terraform templates are deployed. They
 
 
 
-PAC : Pipeline as Code
+## PAC : Pipeline as Code
 
 Azure Artifacts :
 ```
@@ -108,7 +108,5 @@ Steps:
 
 ```$(system.defaultworkingdirectory) : The local path on the agent where your source code``` 
 
+```$(build.artifactstagingdirectory) : The local path on the agent where any artifacts are copied ``` 
 
-
-'$ (build.artifactstagingdirectory)'
-The local path on the agent where any artifacts are copied
