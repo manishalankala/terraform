@@ -106,8 +106,8 @@ Steps:
 
 
 
-$ (system.defaultworkingdirectory)'
-The local path on the agent where your source code
+```$(system.defaultworkingdirectory) : The local path on the agent where your source code``` 
+
 
 
 '$ (build.artifactstagingdirectory)'
