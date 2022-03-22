@@ -1,0 +1,73 @@
+
+
+pool:
+  vmImage: 'Ubuntu-20.04'
+
+variables:
+  imageName: $(Build.Repository.Name):$(Build.BuildId)
+
+steps:
+- task: Gradle@2
+  inputs:
+    workingDirectory: ''
+    gradleWrapperFile: 'gradlew'
+    gradleOptions: '-Xmx3072m'
+    javaHomeOption: 'JDKVersion'
+    jdkVersionOption: '1.8'
+    jdkArchitectureOption: 'x64'
+    tasks: 'clean test'
+  condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/master'))
+
+- task: Gradle@2
+  inputs:
+    workingDirectory: ''
+    gradleWrapperFile: 'gradlew'
+    gradleOptions: '-Xmx3072m'
+    javaHomeOption: 'JDKVersion'
+    jdkVersionOption: '1.8'
+    jdkArchitectureOption: 'x64'
+    tasks: 'sonarqube -Dsonar.projectKey=$(sonarKey) -Dsonar.host.url=$(sonarUrl) -Dsonar.login=$(sonarLogin)'
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+
+- script: |
+    # Login to remote registry
+    docker login -u $(dockerUsername) -p $(dockerPassword) $(dockerRegistry)
+    # Pull the latest builder image
+    docker pull $(dockerRegistry)/$(Build.Repository.Name):builder || true
+    # Only build the 'builder' stage, using pulled image as cache
+    docker build \
+      --target build \
+      --cache-from $(dockerRegistry)/$(Build.Repository.Name):builder \
+      -t $(dockerRegistry)/$(Build.Repository.Name):builder .
+    # Pull the latest runtime image
+    docker pull $(dockerRegistry)/$(Build.Repository.Name):latest || true
+    # Uses the just-built builder image and the pulled runtime image as cache
+    docker build \
+      --cache-from $(dockerRegistry)/$(Build.Repository.Name):builder \
+      --cache-from $(dockerRegistry)/$(Build.Repository.Name):latest \
+      -t $(dockerRegistry)/$(Build.Repository.Name):latest \
+      -t $(dockerRegistry)/$(imageName) .
+    # Push all images
+    docker push $(dockerRegistry)/$(Build.Repository.Name):builder
+    docker push $(dockerRegistry)/$(Build.Repository.Name):latest
+    docker push $(dockerRegistry)/$(imageName)
+  env:
+    pswd: $(dockerPassword)
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+
+- task: HelmInstaller@1
+  inputs:
+    helmVersionToInstall: 'v3.8.0'
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+
+- script: |
+    echo $(kubernetesConfig) | base64 --decode > kubeconfig && export KUBECONFIG=./kubeconfig
+    helm init --service-account tiller --client-only
+    helm upgrade --install --wait \
+      --namespace=farmer-stg \
+      --values farmer-api/values.yaml \
+      --set image.tag=$(Build.BuildId) \
+      --set ingress.hosts[0].host=$(stgEnvDomain) \
+      --set spring.frontendUrl=$(stgEnvDomain) \
+      api-stg farmer-api
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
