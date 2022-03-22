@@ -94,13 +94,16 @@ Easily access all your artifacts in builds and releases-Artifacts integrates nat
 
 Integrate seamless package handling into your CI/CD pipeline
 Easily access all your artifacts in builds and releases-Artifacts integrates natively with
+
 Steps:
 - Icreation of a package feed
-.Create a team feed
-.Connect to the feed in Azure DevOps
+1.Create a team feed
+2.Connect to the feed in Azure DevOps
+
 - Build Integration
-.Pack and Push packages to your feed
-.Setting up Visual studio to consume the feed
+1.Pack and Push packages to your feed
+2.Setting up Visual studio to consume the feed
+
 - Consume from a feed
-.Running build and restoring packages from team feed
-.Setting up new solution locally to consume feed
+1.Running build and restoring packages from team feed
+2.Setting up new solution locally to consume feed
