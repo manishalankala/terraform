@@ -22,9 +22,7 @@ provider "google" {
 }
 
 
-
-
-
+#### Resources ####
 
 resource "google_service_account" "default" {
   account_id   = "service-account-id"
@@ -117,6 +115,8 @@ resource "kubernetes_pod" "sample_app" {
     dns_policy = "None"
   }
 }
+
+#### output ####
 
 
 output "cluster_name" {
