@@ -63,7 +63,7 @@ resource "aws_key_pair" "efs-key-pair" {
 
 resource "null_resource" "aws-efs" {
   connection {
-    host = aws_instance.arviu-aws-efs.public_ip
+    host = aws_instance.aws-efs.public_ip
     agent = true
     user = "${var.EC2_USER}"
   }
@@ -84,6 +84,26 @@ resource "null_resource" "aws-efs" {
 ]      
     
   }
-    depends_on = [aws_instance.arviu-aws-efs]
+    depends_on = [aws_instance.aws-efs]
 
 }
+
+
+
+   
+resource "aws_efs_file_system" "aws-efs" {
+   creation_token = "efs"
+   performance_mode = "generalPurpose"
+   throughput_mode = "bursting"
+   encrypted = "true"
+ tags = {
+     Name = "EFS"
+   }
+ }
+
+
+resource "aws_efs_mount_target" "aws-arviu-efs-mt" {
+   file_system_id  = aws_efs_file_system.aws-efs.id
+   subnet_id = "${var.subnet_ids}"
+   security_groups = [aws_security_group.aws-efs-sg.id]
+ }
