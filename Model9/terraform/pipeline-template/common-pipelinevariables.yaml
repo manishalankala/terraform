@@ -1,6 +1,6 @@
 variables:
   - name: azureHubSubscription
-    value: 'NeoBank Hub Service Connection'
+    value: ' Hub Service Connection'
   - name: dockerDirectory
     value: 'modules/docker'
   - name: helmDirectory
